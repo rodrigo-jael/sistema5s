@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::post('/employees/evaluation', [EmployeeController::class, 'evaluate'])->name('employees.evaluation');
 
-    Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
+    Route::get('/chart2', [EmployeeController::class, 'chart2'])->name('employees.chart2');
 
     
 });

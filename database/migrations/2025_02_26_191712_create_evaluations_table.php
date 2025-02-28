@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('evaluation_5s'); // Almacena la evaluación (cumplio/no_cumplio)
             $table->date('evaluation_date'); // Fecha específica de la evaluación
             $table->timestamps(); // Registra la fecha de creación y actualización
+
+            // Agregar índice único para evitar duplicados (empleado y fecha)
+            $table->unique(['employee_id', 'evaluation_date']); // Previene registros duplicados por empleado y fecha
         });
     }
     
@@ -25,4 +28,3 @@ return new class extends Migration
         Schema::dropIfExists('evaluations');
     }
 };
-

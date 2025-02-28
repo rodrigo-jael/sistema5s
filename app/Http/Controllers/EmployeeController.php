@@ -19,11 +19,8 @@ class EmployeeController extends Controller
             ->groupBy('date')
             ->orderBy('date', 'desc')
             ->pluck('date')
-            ->map(function ($date) {
-                // Formatea la fecha a un formato amigable para mostrar en la vista
-                return Carbon::parse($date)->format('d/m/Y');
-            })
-            ->toArray(); // Convertimos la colección a array para evitar problemas con la vista
+            ->map(fn($date) => Carbon::parse($date)->format('d/m/Y'))
+            ->toArray();
 
         // Muestra el dashboard con los empleados y las fechas
         return view('dashboard', compact('employees', 'dates'));
@@ -37,39 +34,54 @@ class EmployeeController extends Controller
     }
 
     public function chartData(Request $request)
-{
-    // Obtener todas las fechas únicas de la base de datos
-    $dates = Evaluation::selectRaw('DATE(evaluation_date) as date')
-        ->groupBy('date')
-        ->orderBy('date', 'desc')
-        ->pluck('date')
-        ->toArray(); // Convertimos la colección a array para evitar problemas con la vista
+    {
+        // Obtener todas las fechas únicas de la base de datos
+        $dates = Evaluation::selectRaw('DATE(evaluation_date) as date')
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->pluck('date')
+            ->toArray();
 
-    // Filtrar las evaluaciones por la fecha seleccionada, si se especifica alguna
-    $date = $request->input('date');
-    $evaluations = Evaluation::when($date, function ($query) use ($date) {
-        return $query->whereDate('evaluation_date', $date);
-    })
-    ->get();
+        // Filtrar las evaluaciones por la fecha seleccionada, si se especifica alguna
+        $date = $request->input('date');
+        $evaluations = Evaluation::when($date, function ($query) use ($date) {
+            return $query->whereDate('evaluation_date', $date);
+        })->get();
 
-    // Pasar las variables a la vista correctamente
-    return view('employees.chart', [
-        'dates' => $dates,
-        'evaluations' => $evaluations
-    ]);
-}
+        return view('employees.chart', [
+            'dates' => $dates,
+            'evaluations' => $evaluations
+        ]);
+    }
 
     public function evaluate(Request $request)
     {
+        // Obtener la fecha del formulario o usar la fecha actual
+        $evaluationDate = $request->evaluation_date ? Carbon::parse($request->evaluation_date)->toDateString() : Carbon::today()->toDateString();
+
+        // Validar si ya se ha registrado alguna evaluación en la fecha seleccionada
+        $existingEvaluations = Evaluation::whereDate('evaluation_date', $evaluationDate)->exists();
+
+        if ($existingEvaluations) {
+            return redirect()->route('dashboard')->with('error', 'Ya has realizado registros para esta fecha.');
+        }
+
         // Verifica si hay datos en el formulario
         if ($request->has('status') && is_array($request->status)) {
             foreach ($request->status as $employeeId => $status) {
-                // Guarda la evaluación en la tabla evaluations
-                Evaluation::create([
-                    'employee_id' => $employeeId,
-                    'evaluation_5s' => $status,
-                    'evaluation_date' => $request->evaluation_date // Obtiene la fecha del formulario
-                ]);
+                // Verificar si ya existe una evaluación para este empleado en la fecha dada
+                $existingEvaluationForEmployee = Evaluation::where('employee_id', $employeeId)
+                    ->whereDate('evaluation_date', $evaluationDate)
+                    ->exists();
+
+                if (!$existingEvaluationForEmployee) {
+                    // Guarda la evaluación en la tabla evaluations
+                    Evaluation::create([
+                        'employee_id' => $employeeId,
+                        'evaluation_5s' => $status,
+                        'evaluation_date' => $evaluationDate
+                    ]);
+                }
             }
             return redirect()->route('dashboard')->with('success', 'Evaluación guardada correctamente.');
         } else {
@@ -77,24 +89,29 @@ class EmployeeController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function chart2(Request $request)
 {
-    // Validar si ya existe un registro para la fecha
-    $existingEvaluation = Evaluation::where('evaluation_date', $request->evaluation_date)->first();
+    $date = $request->input('date');
 
-    if ($existingEvaluation) {
-        // Si ya existe un registro, redirige con un mensaje de error
-        return redirect()->back()->with('error', 'Ya existe un registro para esta fecha.');
+    if (!$date) {
+        return redirect()->route('employees.index')->with('error', 'Seleccione una fecha.');
     }
 
-    // Si no existe un registro, guardar la nueva evaluación
-    $evaluation = new Evaluation();
-    $evaluation->employee_id = $request->employee_id;
-    $evaluation->evaluation_date = $request->evaluation_date;
-    $evaluation->evaluation_5s = $request->evaluation_5s;
-    $evaluation->save();
+    $evaluations = Evaluation::whereDate('evaluation_date', $date)->get();
 
-    return redirect()->route('evaluations.index')->with('success', 'Registro guardado con éxito.');
+    if ($evaluations->isEmpty()) {
+        return redirect()->route('employees.index')->with('error', 'No hay evaluaciones para esta fecha.');
+    }
+
+    $total = $evaluations->count();
+    $cumplio = $evaluations->where('evaluation_5s', 'cumplio')->count();
+    $noCumplio = $evaluations->where('evaluation_5s', 'no_cumplio')->count();
+
+    $cumplioPorcentaje = ($total > 0) ? round(($cumplio / $total) * 100, 2) : 0;
+    $noCumplioPorcentaje = ($total > 0) ? round(($noCumplio / $total) * 100, 2) : 0;
+
+    return view('employees.chart2', compact('date', 'cumplio', 'noCumplio', 'cumplioPorcentaje', 'noCumplioPorcentaje'));
+
 }
 
 }
