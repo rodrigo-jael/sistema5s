@@ -6,11 +6,11 @@
     </x-slot>
 
     <div class="py-12 flex flex-col items-center">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col items-center">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 w-full">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col items-center w-full">
                 
                 <!-- Formulario para seleccionar la fecha -->
-                <form method="GET" action="{{ route('employees.chart') }}" class="mb-4">
+                <form method="GET" action="{{ route('employees.chart') }}" class="mb-4 w-full">
                     <div class="flex items-center space-x-4">
                         <select name="date" id="dateField" class="p-2 border rounded-md">
                             <option value="">Seleccione una fecha</option>
@@ -38,7 +38,7 @@
                 <!-- Tabla de evaluaciones (solo se muestra después de filtrar) -->
                 @if(request()->date)
                     <div class="overflow-x-auto w-full mt-6">
-                        <table class="min-w-full table-auto">
+                        <table class="w-full table-auto">
                             <thead class="bg-gray-200 dark:bg-gray-700">
                                 <tr>
                                     <th class="px-4 py-2 text-left">Empleado</th>
@@ -61,12 +61,8 @@
                             </tbody>
                         </table>
                     </div>
-
-                   
                 @endif
             </div>
         </div>
     </div>
-
-    
 </x-app-layout>
