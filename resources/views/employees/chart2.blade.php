@@ -8,6 +8,11 @@
     <div class="py-12 flex flex-col items-center">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col items-center">
+                
+                <!-- Mover el botón "Regresar" aquí -->
+                <a href="{{ route('employees.index') }}" class="mb-6 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                    Regresar
+                </a>
 
                 <h3 class="text-lg font-semibold mb-4">Resultados del {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}</h3>
 
@@ -26,10 +31,6 @@
                 <div class="mt-8 w-full">
                     <canvas id="pieChart"></canvas>
                 </div>
-
-                <a href="{{ route('employees.index') }}" class="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                    Regresar
-                </a>
             </div>
         </div>
     </div>

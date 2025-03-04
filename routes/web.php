@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/employees/evaluation', [EmployeeController::class, 'evaluate'])->name('employees.evaluation');
 
     Route::get('/chart2', [EmployeeController::class, 'chart2'])->name('employees.chart2');
+
+    Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
+    Route::get('/reportes/export', [ReportesController::class, 'export'])->name('reportes.export');
 
     
 });

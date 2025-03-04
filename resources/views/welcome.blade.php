@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,14 +25,19 @@
             <p class="text-gray-600 mt-4">
                 Optimiza tu entorno de trabajo aplicando la metodología 5S para mejorar la eficiencia y organización.
             </p>
-            <div class="mt-6">
-                <a href="/login" class="bg-purple-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-purple-700 transition duration-300">
+            <div class="mt-6 flex flex-wrap justify-center md:justify-start space-x-4">
+                <a href="/login" class="bg-purple-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-purple-700 transition duration-300 w-full sm:w-auto">
                     Iniciar Registro 
                 </a>
 
-                <!-- Botón para ver las evaluaciones (con margen izquierdo) -->
-                <a href="/grafica" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 ml-4">
+                <!-- Botón para ver las evaluaciones -->
+                <a href="/grafica" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 w-full sm:w-auto">
                      Ver Evaluaciones
+                </a>
+
+                <!-- Botón para ver los reportes -->
+                <a href="/reportes" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 w-full sm:w-auto">
+                     Ver Reportes
                 </a>
             </div>
             

@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col items-center w-full">
                 
                 <!-- Formulario para seleccionar la fecha -->
-                <form method="GET" action="{{ route('employees.chart') }}" class="mb-4 w-full">
+                <form method="GET" action="{{ route('employees.chart') }}" class="mb-4 w-full" id="filterForm">
                     <div class="flex items-center space-x-4">
                         <select name="date" id="dateField" class="p-2 border rounded-md">
                             <option value="">Seleccione una fecha</option>
@@ -20,9 +20,6 @@
                                 </option>
                             @endforeach
                         </select>
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                            Filtrar por fecha
-                        </button>
                         <a href="{{ route('welcome') }}" class="bg-green-500 text-black px-6 py-2 rounded-md text-lg hover:bg-blue-600 transition">
                             Regresar
                         </a>
@@ -65,4 +62,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("dateField").addEventListener("change", function () {
+                document.getElementById("filterForm").submit();
+            });
+        });
+    </script>
 </x-app-layout>
