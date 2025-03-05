@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,11 +8,9 @@
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen text-gray-800">
     <!-- Contenedor para el encabezado con el logo -->
-    <div class="w-full flex justify-between items-center p-4 absolute top-0 left-0 right-0 ">
-        
+    <div class="w-full flex justify-between items-center p-4 absolute top-0 left-0 right-0">
         <!-- Logo de la empresa en la parte superior derecha -->
         <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto ml-auto">
-        
     </div>
 
     <!-- Contenedor principal -->
@@ -25,22 +22,17 @@
             <p class="text-gray-600 mt-4">
                 Optimiza tu entorno de trabajo aplicando la metodología 5S para mejorar la eficiencia y organización.
             </p>
-            <div class="mt-6 flex flex-wrap justify-center md:justify-start space-x-4">
-                <a href="/login" class="bg-purple-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-purple-700 transition duration-300 w-full sm:w-auto">
+            <div class="mt-6 flex flex-col sm:flex-row sm:space-x-4 gap-4 justify-center md:justify-start">
+                <a href="/login" class="bg-purple-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-purple-700 transition duration-300 w-full sm:w-auto text-center">
                     Iniciar Registro 
                 </a>
-
-                <!-- Botón para ver las evaluaciones -->
-                <a href="/grafica" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 w-full sm:w-auto">
+                <a href="/grafica" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 w-full sm:w-auto text-center">
                      Ver Evaluaciones
                 </a>
-
-                <!-- Botón para ver los reportes -->
-                <a href="/reportes" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 w-full sm:w-auto">
+                <a href="/reportes" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 w-full sm:w-auto text-center">
                      Ver Reportes
                 </a>
             </div>
-            
         </div>
         
         <!-- Imagen -->

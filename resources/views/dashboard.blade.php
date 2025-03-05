@@ -46,9 +46,16 @@
                                                 <input type="radio" name="status[{{ $employee->id }}]" value="no_cumplio">
                                                 <span class="ml-2 text-red-600">✖</span>
                                             </label>
-                                            <a href="{{ route('employee.view', $employee->id) }}" class="text-blue-500 hover:underline">
-                                                🔍
-                                            </a>
+
+                                            <!-- Lupa con Tooltip -->
+                                            <div class="relative group">
+                                                <a href="{{ route('employee.view', $employee->id) }}" class="text-blue-500 text-xl hover:scale-110 transition-transform">
+                                                    🔍
+                                                </a>
+                                                <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    Ver Eco-Map
+                                                </span>
+                                            </div>
                                         </div>
                                     </li>
                                 @empty
