@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col items-center">
                 
                 <!-- Mover el botón "Regresar" aquí -->
-                <a href="{{ route('employees.index') }}" class="mb-6 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                <a href="{{ route('welcome') }}" class="mb-6 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
                     Regresar
                 </a>
 
