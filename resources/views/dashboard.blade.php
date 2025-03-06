@@ -23,9 +23,11 @@
                         <div class="mt-4 flex justify-between items-center">
                             <h3 class="text-lg font-semibold">Evaluación de 5S</h3>
                             <div>
-                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                                    Guardar Evaluación
-                                </button>
+                                @if(count($employees) > 0)
+                                    <button type="submit" id="guardar-btn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                                        Guardar Evaluación
+                                    </button>
+                                @endif
                                 <a href="{{ route('welcome') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
                                     Regresar
                                 </a>
@@ -78,9 +80,10 @@
                 input.closest(".employee-item").remove();
             });
 
-            // Si no quedan empleados, mostrar mensaje
+            // Verifica si aún hay empleados después de eliminar los seleccionados
             if (document.querySelectorAll(".employee-item").length === 0) {
                 document.getElementById("employee-list").innerHTML = '<li class="text-center text-gray-500">Todos los empleados ya han sido evaluados hoy.</li>';
+                document.getElementById("guardar-btn").style.display = "none"; // Oculta el botón
             }
         });
     });

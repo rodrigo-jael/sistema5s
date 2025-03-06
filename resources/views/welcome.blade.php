@@ -29,9 +29,9 @@
                 <a href="/grafica" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 w-full sm:w-auto text-center">
                      Ver Evaluaciones
                 </a>
-                <a href="/reportes" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 w-full sm:w-auto text-center">
+                <a href="{{ route('reportes.index') }}" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 w-full sm:w-auto text-center">
                      Ver Reportes
-                </a>
+                 </a>
             </div>
         </div>
         

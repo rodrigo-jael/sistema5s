@@ -4,86 +4,120 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evaluation;
-use App\Models\Employee; // Asegúrate de importar Employee
+use App\Models\Employee;
 use Carbon\Carbon;
 use App\Exports\ReportesExport;
-use Maatwebsite\Excel\Facades\Excel; // Asegúrate de importar Excel
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Obtener todas las fechas únicas de evaluación
-        $fechas = Evaluation::selectRaw('DATE(evaluation_date) as date')
-            ->groupBy('date')
-            ->orderBy('date', 'desc')
-            ->pluck('date')
-            ->map(fn($date) => Carbon::parse($date)->format('d/m/Y'));
+        // Definir el rango de fechas
+        $fechaInicio = Carbon::parse('2025-02-03'); // 3 de febrero
+        $fechaFin = Carbon::parse('2025-03-05'); // 5 de marzo
 
-        // Obtener estadísticas generales
-        $totalEvaluaciones = Evaluation::count();
-        $totalCumplio = Evaluation::where('evaluation_5s', 'cumplio')->count();
-        $totalNoCumplio = Evaluation::where('evaluation_5s', 'no_cumplio')->count();
+        // Crear las semanas de lunes a viernes
+        $semanas = $this->getSemanas($fechaInicio, $fechaFin);
 
-        // Calcular porcentajes
-        $porcentajeCumplio = ($totalEvaluaciones > 0) ? round(($totalCumplio / $totalEvaluaciones) * 100, 2) : 0;
-        $porcentajeNoCumplio = ($totalEvaluaciones > 0) ? round(($totalNoCumplio / $totalEvaluaciones) * 100, 2) : 0;
+        // Filtrar evaluaciones por semana si se seleccionó una
+        if ($request->has('semana')) {
+            $semanaIndex = $request->semana - 1;
 
-        // Obtener al empleado más cumplidor
-        $empleadoMasCumplidor = Employee::select('employees.name')
-            ->join('evaluations', 'employees.id', '=', 'evaluations.employee_id')
-            ->where('evaluations.evaluation_5s', 'cumplio')
-            ->groupBy('employees.id', 'employees.name')
-            ->orderByRaw('COUNT(evaluations.id) DESC')
-            ->limit(1)
-            ->value('name');
+            if (isset($semanas[$semanaIndex])) {
+                $semanaSeleccionada = $semanas[$semanaIndex];
+                $fechaInicio = $semanaSeleccionada['start'];
+                $fechaFin = $semanaSeleccionada['end'];
+            }
+        }
 
-        // Si no hay empleados que hayan cumplido, asignar un mensaje por defecto
-        $empleadoMasCumplidor = $empleadoMasCumplidor ?? 'No hay empleados que hayan cumplido';
+        // Obtener las evaluaciones dentro del rango de fechas
+        $evaluaciones = Evaluation::whereBetween('evaluation_date', [$fechaInicio, $fechaFin]);
 
-        // Retornar la vista con todas las variables
+        // Obtener fechas únicas
+        $fechas = $evaluaciones->selectRaw('DATE(evaluation_date) as evaluation_date')
+            ->groupBy('evaluation_date')
+            ->orderBy('evaluation_date', 'asc')
+            ->pluck('evaluation_date')
+            ->map(fn($date) => Carbon::parse($date)->format('Y-m-d'))
+            ->toArray();
+
+        // Inicializar variables para almacenar los totales
+        $totalEvaluaciones = 0;
+        $totalCumplio = 0;
+        $totalNoCumplio = 0;
+        $empleados = [];
+        $empleadoMenosCumplio = null;
+        $estrategias = '';
+
+        // Recorrer las fechas y calcular los datos por cada fecha
+        foreach ($fechas as $fecha) {
+            $evaluacionesPorFecha = $evaluaciones->whereDate('evaluation_date', Carbon::parse($fecha));
+
+            $totalEvaluaciones += $evaluacionesPorFecha->count();
+            $totalCumplio += $evaluacionesPorFecha->where('evaluation_5s', 'cumplio')->count();
+            $totalNoCumplio += $evaluacionesPorFecha->where('evaluation_5s', 'no_cumplio')->count();
+
+            // Obtener empleados con sus conteos de cumplimiento
+            $empleados = Employee::withCount([
+                'evaluations as cumplio_count' => function ($query) use ($fecha) {
+                    $query->whereDate('evaluation_date', Carbon::parse($fecha))
+                        ->where('evaluation_5s', 'cumplio');
+                },
+                'evaluations as no_cumplio_count' => function ($query) use ($fecha) {
+                    $query->whereDate('evaluation_date', Carbon::parse($fecha))
+                        ->where('evaluation_5s', 'no_cumplio');
+                }
+            ])->get();
+
+            // Obtener el empleado con menor cumplimiento
+            $empleadoMenosCumplio = $empleados->isEmpty() ? 'Ninguno' : $empleados->sortBy('cumplio_count')->first();
+
+            // Estrategias si el porcentaje de no cumplimiento es mayor
+            $porcentajeCumplio = ($totalEvaluaciones > 0) ? round(($totalCumplio / $totalEvaluaciones) * 100, 2) : 0;
+            $porcentajeNoCumplio = ($totalEvaluaciones > 0) ? round(($totalNoCumplio / $totalEvaluaciones) * 100, 2) : 0;
+            $estrategias = $porcentajeNoCumplio > $porcentajeCumplio
+                ? 'Implementar estrategias de mejora, como capacitaciones adicionales.'
+                : 'No se requieren estrategias adicionales';
+        }
+
+        // Pasar los datos a la vista
         return view('reportes.index', compact(
-            'fechas', 'totalEvaluaciones', 'totalCumplio', 
-            'totalNoCumplio', 'porcentajeCumplio', 'porcentajeNoCumplio', 
-            'empleadoMasCumplidor'
+            'semanas', 
+            'totalEvaluaciones', 
+            'totalCumplio', 
+            'totalNoCumplio', 
+            'porcentajeCumplio', 
+            'porcentajeNoCumplio', 
+            'empleados', 
+            'empleadoMenosCumplio', 
+            'estrategias'
         ));
     }
 
-    public function export()
+    // Método para obtener las semanas de lunes a viernes
+    private function getSemanas($fechaInicio, $fechaFin)
     {
-        // Obtener los datos desde el método index
-        $fechas = Evaluation::selectRaw('DATE(evaluation_date) as date')
-            ->groupBy('date')
-            ->orderBy('date', 'desc')
-            ->pluck('date')
-            ->map(fn($date) => Carbon::parse($date)->format('d/m/Y'));
+        $semanas = [];
+        $startDate = $fechaInicio->copy();
 
-        $totalEvaluaciones = Evaluation::count();
-        $totalCumplio = Evaluation::where('evaluation_5s', 'cumplio')->count();
-        $totalNoCumplio = Evaluation::where('evaluation_5s', 'no_cumplio')->count();
+        while ($startDate <= $fechaFin) {
+            $lunes = $startDate->copy()->startOfWeek();
+            $viernes = $lunes->copy()->addDays(4); // Viernes de la semana
 
-        $porcentajeCumplio = ($totalEvaluaciones > 0) ? round(($totalCumplio / $totalEvaluaciones) * 100, 2) : 0;
-        $porcentajeNoCumplio = ($totalEvaluaciones > 0) ? round(($totalNoCumplio / $totalEvaluaciones) * 100, 2) : 0;
+            if ($lunes >= $fechaInicio && $viernes <= $fechaFin) {
+                $semanas[] = [
+                    'nombre' => 'Semana ' . (count($semanas) + 1),
+                    'fecha_inicio' => $lunes->format('d/m/Y'),
+                    'fecha_fin' => $viernes->format('d/m/Y'),
+                    'start' => $lunes->copy(),
+                    'end' => $viernes->copy(),
+                ];
+            }
 
-        $empleadoMasCumplidor = Employee::select('employees.name')
-            ->join('evaluations', 'employees.id', '=', 'evaluations.employee_id')
-            ->where('evaluations.evaluation_5s', 'cumplio')
-            ->groupBy('employees.id', 'employees.name')
-            ->orderByRaw('COUNT(evaluations.id) DESC')
-            ->limit(1)
-            ->value('name');
+            $startDate = $lunes->copy()->addDays(7);
+        }
 
-        $empleadoMasCumplidor = $empleadoMasCumplidor ?? 'No hay empleados que hayan cumplido';
-
-        // Pasamos los datos al exportador
-        return Excel::download(new ReportesExport(
-            $fechas,
-            $totalEvaluaciones,
-            $totalCumplio,
-            $totalNoCumplio,
-            $porcentajeCumplio,
-            $porcentajeNoCumplio,
-            $empleadoMasCumplidor
-        ), 'reportes_5s.xlsx');
+        return $semanas;
     }
 }
