@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // Redirigir a 'welcome' en lugar de 'dashboard'
-        return redirect()->intended(route('welcome', absolute: false));
+        return redirect()->intended(route('welcome2', absolute: false));
     }
 
     /**

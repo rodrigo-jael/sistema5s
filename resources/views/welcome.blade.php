@@ -40,5 +40,14 @@
             <img src="https://envira.es/wp-content/uploads/2024/01/Metodologia-5S.jpg" alt="Metodología 5S" class="rounded-lg shadow-md w-full max-w-sm">
         </div>
     </div>
+
+    <!-- Botón de redirección -->
+    @if (auth()->check())
+        <div class="absolute top-4 right-4">
+            <a href="{{ url('/welcome2') }}" class="bg-red-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
+                Salir
+            </a>
+        </div>
+    @endif
 </body>
 </html>
