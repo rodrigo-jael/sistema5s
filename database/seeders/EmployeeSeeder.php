@@ -34,7 +34,7 @@ class EmployeeSeeder extends Seeder
         Employee::create([
             'name' => 'Osvaldo',
             'cumplio' => true,
-            'foto' => 'foto_carlos.jpg'
+            'foto' => 'images/imagen9.jpg'
         ]);
 
         Employee::create([
