@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Lista de Empleados - Evaluación 5S') }}
+        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
+            {{ __('Lista de Empleados') }}
         </h2>
     </x-slot>
 
@@ -51,10 +51,10 @@
 
                                             <!-- Lupa con Tooltip -->
                                             <div class="relative group">
-                                                <a href="{{ route('employee.view', $employee->id) }}" class="text-blue-500 text-xl hover:scale-110 transition-transform">
+                                                <a href="{{ route('employee.view', $employee->id) }}" class="text-blue-500 text-xl hover:scale-110 transition-transform relative z-10">
                                                     🔍
                                                 </a>
-                                                <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <span class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center pointer-events-none whitespace-nowrap min-w-max">
                                                     Ver Eco-Map
                                                 </span>
                                             </div>

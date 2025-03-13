@@ -5,6 +5,8 @@ use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteExportController;
+use App\Http\Controllers\AguaController;
+
 
 
 
@@ -48,6 +50,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
     Route::get('/reportes/export', [ReporteExportController::class, 'export'])->name('reportes.export');
+
+    
+    Route::get('/agua', [AguaController::class, 'index'])->name('agua.index');
+
 });
 
 require __DIR__.'/auth.php';

@@ -2,7 +2,7 @@
     <body class="bg-gray-100 p-8">
         <div class="max-w-6xl mx-auto">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-bold text-purple-700">Reportes de Evaluación 5S</h1>
+                <h1 class="text-3xl font-bold text-blue-600 text-center">Reportes de Evaluación 5S</h1>
             </div>
 
             <!-- Contenedor del formulario y el botón de regresar -->

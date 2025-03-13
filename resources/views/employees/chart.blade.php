@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
             {{ __('Registros de Evaluación 5S') }}
         </h2>
     </x-slot>
@@ -25,7 +25,7 @@
                         </a>
                         @if(request()->date)
                         <a href="{{ route('employees.chart2', ['date' => request()->date]) }}" 
-                            class="bg-red-500 text-black px-6 py-2 rounded-md text-lg hover:bg-yellow-600 transition">
+                            class="bg-yellow-500 text-black px-6 py-2 rounded-md text-lg hover:bg-yellow-600 transition">
                             Ver Gráfica
                         </a>
                         @endif
