@@ -37,7 +37,7 @@
 
             <!-- Botón para realizar acciones -->
             <div class="mt-6 flex justify-center lg:justify-start">
-                <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300">
+                <a href="#" class="bg-pink-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300">
                     Ver Detalles
                 </a>
             </div>
