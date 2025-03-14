@@ -2,7 +2,10 @@
 /node_modules
 /public/build
 /public/hot
+<<<<<<< HEAD
 public/storage
+=======
+>>>>>>> main
 /storage/*.key
 /storage/pail
 
