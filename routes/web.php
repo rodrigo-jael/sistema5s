@@ -6,6 +6,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteExportController;
 use App\Http\Controllers\AguaController;
+use App\Http\Controllers\LuzController;
+use App\Http\Controllers\registerluzController;
+
 
 
 
@@ -53,6 +56,12 @@ Route::middleware('auth')->group(function () {
 
     
     Route::get('/agua', [AguaController::class, 'index'])->name('agua.index');
+
+
+
+    Route::get('/luz', [LuzController::class, 'index'])->name('luz.index');
+    Route::get('/registerluz', [registerluzController::class, 'index'])->name('registerluz.index');
+
 
 });
 
