@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteExportController;
 use App\Http\Controllers\AguaController;
+use App\Http\Controllers\ConsumoAguaController;
+
 
 
 
@@ -54,6 +56,15 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/agua', [AguaController::class, 'index'])->name('agua.index');
 
-});
+    Route::get('/consumo-agua', [ConsumoAguaController::class, 'index'])->name('consumo_agua.index');  // Ruta para la vista principal
+    Route::get('/consumo-agua/registro', [ConsumoAguaController::class, 'index2'])->name('consumo_agua.index2');  // Ruta para la vista de registro
+
+    Route::get('/consumo-agua/create', [ConsumoAguaController::class, 'create'])->name('consumo_agua.create');
+    Route::post('/consumo-agua', [ConsumoAguaController::class, 'store'])->name('consumo_agua.store');
+    Route::get('consumo_agua/show', [ConsumoAguaController::class, 'show'])->name('consumo_agua.show');
+    Route::delete('/consumo-agua/{id}', [ConsumoAguaController::class, 'destroy'])->name('consumo_agua.destroy');
+
+
+});                          
 
 require __DIR__.'/auth.php';
