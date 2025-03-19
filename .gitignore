@@ -2,14 +2,11 @@
 /node_modules
 /public/build
 /public/hot
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 public/storage
-=======
->>>>>>> main
-=======
+
+
 public/storage
->>>>>>> origin/dev-mary
 /storage/*.key
 /storage/pail
 

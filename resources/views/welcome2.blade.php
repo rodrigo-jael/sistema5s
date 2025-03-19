@@ -26,7 +26,7 @@
             </a>
 
             <!-- Tarjeta para Luz -->
-            <a href="#" class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center transition transform hover:scale-105 hover:shadow-xl text-center">
+            <a href="{{ route('luz.index') }}" class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center transition transform hover:scale-105 hover:shadow-xl text-center">
                 <img src="storage/images/luz.png" class="w-16 h-16 mb-4" alt="Luz">
                 <span class="text-lg font-semibold text-yellow-500">Módulo Luz</span>
             </a>
