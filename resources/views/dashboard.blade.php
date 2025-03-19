@@ -1,8 +1,11 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
-            {{ __('Lista de Empleados') }}
-        </h2>
+<x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Lista de empleados</h2>
+            <a href="{{ route('welcome') }}" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -28,9 +31,7 @@
                                         Guardar Evaluación
                                     </button>
                                 @endif
-                                <a href="{{ route('welcome') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
-                                    Regresar
-                                </a>
+                                
                             </div>
                         </div>
 

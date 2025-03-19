@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
-            {{ __('Registrar Consumo de Agua') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Registro del consumo de agua</h2>
+            <a href="{{ route('consumo_agua.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -20,11 +23,6 @@
                         @csrf
                         <div class="mt-4 flex justify-between items-center">
                             <h3 class="text-lg font-semibold">Registrar Consumo de Agua</h3>
-                            <div>
-                                <a href="{{ route('consumo_agua.index') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
-                                    Regresar
-                                </a>
-                            </div>
                         </div>
 
                         <div class="mt-4">

@@ -32,13 +32,13 @@
                 <!-- Botón para Iniciar Registro -->
                 <a href="{{ route('consumo_agua.index2') }}" 
                    class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 flex items-center gap-2">
-                    📋 Iniciar Registro
+                     Iniciar Registro
                 </a>
 
                 <!-- Botón para Ver Reportes -->
                 <a href="{{ route('consumo_agua.show') }}" 
                    class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 flex items-center gap-2">
-                    📊 Ver Reportes
+                    Ver Reportes
                 </a>
             </div>
         </div>

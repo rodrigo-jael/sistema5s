@@ -9,6 +9,7 @@ use App\Http\Controllers\AguaController;
 use App\Http\Controllers\ConsumoAguaController;
 use App\Http\Controllers\LuzController;
 use App\Http\Controllers\registerluzController;
+use App\Http\Controllers\ConsumoAguaReporteController;
 
 
 
@@ -64,7 +65,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/consumo-agua/create', [ConsumoAguaController::class, 'create'])->name('consumo_agua.create');
     Route::post('/consumo-agua', [ConsumoAguaController::class, 'store'])->name('consumo_agua.store');
-    Route::get('consumo_agua/show', [ConsumoAguaController::class, 'show'])->name('consumo_agua.show');
+    Route::get('consumo_agua/show', [ConsumoAguaReporteController::class,  'show'])->name('consumo_agua.show');
     Route::delete('/consumo-agua/{id}', [ConsumoAguaController::class, 'destroy'])->name('consumo_agua.destroy');
 
                       

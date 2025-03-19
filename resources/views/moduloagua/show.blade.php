@@ -1,25 +1,59 @@
 <x-app-layout>
-
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
-            {{ __('Listado de consumo ') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Reportes de Consumo de Agua</h2>
+            <a href="{{ route('consumo_agua.index') }}" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Detalle del Consumo</h1>
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <h3 class="text-lg font-bold mb-4">Consumo de Agua</h3>
 
-        <!-- Mostrar los datos del último consumo -->
-        @if ($consumo)
-            <p><strong>Fecha:</strong> {{ $consumo->fecha }}</p>
-            <p><strong>Semana:</strong> {{ $consumo->semana }}</p>
-            <p><strong>Litros Consumidos:</strong> {{ $consumo->litros_consumidos }}</p>
-            <p><strong>Litros Ahorrados:</strong> {{ 450 - $consumo->litros_consumidos }}</p>
-        @else
-            <p>No hay registros de consumo.</p>
-        @endif
+                <!-- Formulario para seleccionar periodo bimestral -->
+                <form action="{{ route('consumo_agua.reporte') }}" method="GET" class="mb-6">
+                    <div class="flex items-center space-x-4">
+                        <label for="periodo_inicio" class="text-lg">Selecciona el periodo bimestral:</label>
+                        <select name="periodo_inicio" id="periodo_inicio" class="border p-2">
+                            <option value="01-01" {{ request('periodo_inicio') == '01-01' ? 'selected' : '' }}>Enero-Febrero</option>
+                            <option value="03-01" {{ request('periodo_inicio') == '03-01' ? 'selected' : '' }}>Marzo-Abril</option>
+                            <option value="05-01" {{ request('periodo_inicio') == '05-01' ? 'selected' : '' }}>Mayo-Junio</option>
+                            <option value="07-01" {{ request('periodo_inicio') == '07-01' ? 'selected' : '' }}>Julio-Agosto</option>
+                            <option value="09-01" {{ request('periodo_inicio') == '09-01' ? 'selected' : '' }}>Septiembre-Octubre</option>
+                            <option value="11-01" {{ request('periodo_inicio') == '11-01' ? 'selected' : '' }}>Noviembre-Diciembre</option>
+                        </select>
+                        <button type="submit" class="bg-blue-500 text-white p-2 rounded">Ver Análisis</button>
+                    </div>
+                </form>
 
-        <a href="{{ route('consumo_agua.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Volver</a>
+                <!-- Mostrar análisis del consumo -->
+                @if(isset($periodos) && count($periodos) > 0)
+                    <h2 class="text-xl font-bold mt-4">Análisis del Consumo de Agua ({{ $periodoInicio->format('d/m/Y') }} - {{ $periodoFin->format('d/m/Y') }})</h2>
+                    <p class="mb-4">Promedio de consumo en el periodo seleccionado: <strong>{{ $promedioConsumo }} L</strong></p>
+
+                    <table class="w-full table-auto border-collapse border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="border border-gray-300 px-4 py-2">Fecha</th>
+                                <th class="border border-gray-300 px-4 py-2">Litros Utilizados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($periodos as $periodo)
+                                <tr class="{{ $periodo['es_sobre_promedio'] ? 'bg-red-200' : 'bg-green-200' }}">
+                                    <td class="border border-gray-300 px-4 py-2">{{ \Carbon\Carbon::parse($periodo['fecha'])->format('d/m/Y') }}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $periodo['litros_utilizados'] }} L</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No hay registros disponibles para el periodo seleccionado.</p>
+                @endif
+            </div>
+        </div>
     </div>
-    
 </x-app-layout>
