@@ -12,8 +12,8 @@
         <!-- Logo de la empresa en la parte superior derecha -->
         <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto ml-auto">
         
-        <a href="{{ route('welcome2') }}" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
-               Salir
+        <a href="{{ route('welcome2') }}" class="bg-red-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
+            Salir
         </a>
     </div>
 
@@ -27,18 +27,18 @@
                 Aquí podrás gestionar todo lo relacionado con el consumo y ahorro de agua dentro del Sistema QMS.
             </p>
 
-            <!-- Información de consumo de agua -->
-            <div class="bg-blue-100 p-6 rounded-md shadow-md">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-4">Consumo de Agua Actual</h2>
-                <p class="text-gray-600">
-                    El consumo de agua en la última medición fue de 255.42 litros.
-                </p>
-            </div>
+            <!-- Botones para Acciones -->
+            <div class="mt-6 flex flex-col lg:flex-row gap-4 justify-center lg:justify-start">
+                <!-- Botón para Iniciar Registro -->
+                <a href="{{ route('consumo_agua.index2') }}" 
+                   class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 flex items-center gap-2">
+                    📋 Iniciar Registro
+                </a>
 
-            <!-- Botón para realizar acciones -->
-            <div class="mt-6 flex justify-center lg:justify-start">
-                <a href="#" class="bg-pink-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300">
-                    Ver Detalles
+                <!-- Botón para Ver Reportes -->
+                <a href="{{ route('consumo_agua.show') }}" 
+                   class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 flex items-center gap-2">
+                    📊 Ver Reportes
                 </a>
             </div>
         </div>
