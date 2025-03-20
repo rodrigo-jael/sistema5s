@@ -13,7 +13,7 @@
         <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto ml-auto">
 
         <a href="{{ route('welcome2') }}" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
-               Salir
+               Regresar
         </a>
 
     </div>

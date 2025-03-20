@@ -10,26 +10,31 @@ class ConsumoAguaReporteController extends Controller
 {
     public function show(Request $request)
     {
-        // Verificar si las fechas de inicio y fin están presentes
-        if (!$request->has('inicio') || !$request->has('fin')) {
-            return response()->json(['error' => 'Las fechas de inicio y fin son requeridas.'], 400);
+        // Obtener el primer y último registro de consumo de agua desde la base de datos para determinar el rango de fechas
+        $primerRegistro = ConsumoAgua::orderBy('fecha', 'asc')->first();
+        $ultimoRegistro = ConsumoAgua::orderBy('fecha', 'desc')->first();
+
+        // Si no hay registros de consumo de agua
+        if (!$primerRegistro || !$ultimoRegistro) {
+            return redirect()->route('consumo_agua.index')->with('error', 'No se encontraron registros de consumo de agua.');
         }
 
-        // Intentar parsear las fechas de inicio y fin
-        try {
-            $periodoInicio = Carbon::createFromFormat('Y-m-d', $request->inicio);
-            $periodoFin = Carbon::createFromFormat('Y-m-d', $request->fin);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Formato de fecha no válido para las fechas personalizadas.'], 400);
-        }
+        // Obtener el rango de fechas del primer y último registro
+        $periodoInicio = Carbon::parse($primerRegistro->fecha);
+        $periodoFin = Carbon::parse($ultimoRegistro->fecha);
 
-        // Filtrar registros por fecha
+        // Obtener los registros filtrados entre el rango de fechas
         $registros = ConsumoAgua::whereBetween('fecha', [$periodoInicio, $periodoFin])->get();
 
-        // Calcular el promedio de litros utilizados en el período
+        // Si no hay registros en el periodo seleccionado
+        if ($registros->isEmpty()) {
+            return redirect()->route('consumo_agua.index')->with('error', 'No se encontraron registros para el periodo seleccionado.');
+        }
+
+        // Calcular el promedio de litros consumidos en el periodo seleccionado
         $promedioConsumo = $registros->avg('litros_consumidos');
 
-        // Crear una lista de los periodos con el cálculo
+        // Crear lista de datos para la vista
         $periodos = [];
         foreach ($registros as $registro) {
             $esSobrePromedio = $registro->litros_consumidos > $promedioConsumo;
@@ -40,6 +45,7 @@ class ConsumoAguaReporteController extends Controller
             ];
         }
 
+        // Pasar los datos a la vista
         return view('moduloagua.show', compact('periodos', 'promedioConsumo', 'periodoInicio', 'periodoFin'));
     }
 }
