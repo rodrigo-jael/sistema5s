@@ -38,10 +38,10 @@
 
             <!-- Contenedor de los botones -->
             <div class="mt-6 flex justify-center lg:justify-start gap-4">
-               <a href="{{ route('registerluz.index')}}" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300">
+               <a href="{{ route('consumoenergia.index') }}" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300">
                  Inicia Registro
                </a>
-               <a href="" class="bg-yellow-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300">
+               <a href="{{ route('consumoenergia.reportes') }}" class="bg-yellow-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300">
                  Ver Reportes
                </a>
             </div>

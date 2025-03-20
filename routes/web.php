@@ -9,6 +9,8 @@ use App\Http\Controllers\AguaController;
 use App\Http\Controllers\ConsumoAguaController;
 use App\Http\Controllers\LuzController;
 use App\Http\Controllers\registerluzController;
+use App\Http\Controllers\ConsumoLuzController;
+use App\Http\Controllers\ConsumoEnergiaController;
 
 
 
@@ -71,7 +73,12 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/luz', [LuzController::class, 'index'])->name('luz.index');
-    Route::get('/registerluz', [registerluzController::class, 'index'])->name('registerluz.index');
+    Route::get('/consumo-energia', [ConsumoEnergiaController::class, 'index'])->name('consumo_energia.index');
+    Route::post('/consumo-energia', [ConsumoEnergiaController::class, 'store'])->name('consumo_energia.store');
+    Route::get('/consumoenergia', [ConsumoEnergiaController::class, 'index'])->name('consumoenergia.index');
+   
+    Route::resource('consumoenergia', ConsumoEnergiaController::class);
+    Route::get('/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes'); // Para ver los reportes
 
 
 });
