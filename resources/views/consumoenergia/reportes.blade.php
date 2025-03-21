@@ -10,7 +10,7 @@
 
        
         <div class="flex justify-end mb-4">
-            <a href="{{ route('luz.index') }}" class="px-6 py-3 bg-gray-600 text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">
+            <a href="{{ route('luz.index') }}" class="bg-red-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
                 Regresar
             </a>
         </div>
