@@ -79,9 +79,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/consumoenergia', [ConsumoEnergiaController::class, 'index'])->name('consumoenergia.index');
    
     Route::resource('consumoenergia', ConsumoEnergiaController::class);
-    Route::get('/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes'); // Para ver los reportes
+    //Route::get('/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes'); // Para ver los reportes
 
 
 });
+
+ 
 
 require __DIR__.'/auth.php';

@@ -5,14 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="#">
                     <img src="{{ asset('storage/images/logojorial.png') }}" alt="" class="h-20 w-auto">
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('welcome2')" :active="request()->routeIs('welcome2')">
                         {{ __('Sistema QMS') }}
                     </x-nav-link>
                 </div>

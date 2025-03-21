@@ -13,76 +13,76 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         // Agregar empleados de ejemplo
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Daniel Midel Avila',
             'cumplio' => true,
             'foto' => 'images/imagen7.jpg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Francisco Gutierrez Chavez',
             'cumplio' => true,
             'foto' => 'images/imagen4.jpeg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Ricardo Cervantes Escarrega',
             'cumplio' => true,
             'foto' => 'images/imagen6.jpg'
         ]);
 
-        Employee::create([
-            'name' => 'Osvaldo',
+        Employee::updateOrCreate([
+            'name' => 'Osvaldo Martínez Gómez',
             'cumplio' => true,
             'foto' => 'images/imagen9.jpg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Victor Manuel Garcia Rojas',
             'cumplio' => true,
             'foto' => 'images/imagen5.jpeg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Jaime Muñoz Ruiz',
             'cumplio' => false,
             'foto' => 'images/imagen8.jpg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'María De Jesus Gutierrez Morales',
             'cumplio' => true,
             'foto' => 'images/imagen2.jpeg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Rodrigo Jael Romero Melendez',
             'cumplio' => false,
             'foto' => 'images/imagen3.jpeg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Emmanuel Guadarrama Contreras',
             'cumplio' => true,
-            'foto' => 'foto_carlos.jpg'
+            'foto' => 'images/imagen10.jpg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Jaime Mercado Osorio',
             'cumplio' => true,
-            'foto' => 'foto_carlos.jpg'
+            'foto' => 'images/imagen11.jpg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Jose Alberto Ortiz Gonzales',
             'cumplio' => true,
-            'foto' => 'foto_carlos.jpg'
+            'foto' => 'images/imagen12.jpg'
         ]);
 
-        Employee::create([
+        Employee::updateOrCreate([
             'name' => 'Luis Clodualdo Montesinos Keb',
             'cumplio' => true,
-            'foto' => 'foto_carlos.jpg'
+            'foto' => 'images/imagen13.jpg'
         ]);
 
         
