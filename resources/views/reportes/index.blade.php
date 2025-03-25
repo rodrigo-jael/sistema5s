@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Reportes de Evaluación 5S</h2>
+            <h2 class="bg-white dark:bg-gray-800 leading-tight">Reportes de Evaluación 5S</h2>
             <a href="{{ route('welcome') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                 ← Regresar
             </a>
@@ -10,12 +10,12 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
                 
                 <!-- Formulario de selección de semana -->
                 <div class="mb-6 flex justify-center">
-                    <div class="flex items-center gap-4">
-                        <label for="semana" class="text-lg font-semibold">Seleccionar Semana:</label>
+                    <div class=" bg-white dark:bg-gray-800 flex items-center gap-4">
+                        <label for="semana" class="text-lg font-semibold ">Seleccionar Semana:</label>
                         <select name="semana" id="semana" class="border p-2 rounded-md">
                             <option value="">Selecciona una semana</option>
                             @foreach ($semanas as $index => $semana)
@@ -28,8 +28,8 @@
                 </div>
 
                 <!-- Resultados -->
-                <div id="resultados" class="bg-white shadow-md rounded-lg p-6 {{ request('semana') ? '' : 'hidden' }}">
-                    <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center">Resultados por Semana</h2>
+                <div id="resultados" class="bg-white dark:bg-gray-800  shadow-md rounded-lg p-6 {{ request('semana') ? '' : 'hidden' }}">
+                    <h2 class="bg-white dark:bg-gray-800  mb-4 text-center">Resultados por Semana</h2>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
                         <div class="bg-blue-500 text-white p-4 rounded-lg">
@@ -49,11 +49,11 @@
                     </div>
 
                     <!-- Tabla de empleados -->
-                    <h2 class="text-xl font-semibold text-gray-700 mt-6 mb-4 text-center">Empleados</h2>
+                    <h2 class="bg-white dark:bg-gray-800  mt-6 mb-4 text-center">Empleados</h2>
                     <div class="overflow-x-auto">
                         <table class="w-full border-collapse border text-center">
                             <thead>
-                                <tr class="bg-gray-200">
+                                <tr class="bg-white dark:bg-gray-800 ">
                                     <th class="px-4 py-2 border">Empleado</th>
                                     <th class="px-4 py-2 border">Cumplió</th>
                                     <th class="px-4 py-2 border">No Cumplió</th>
@@ -78,12 +78,12 @@
                     </div>
 
                     <!-- Empleado menos cumplidor -->
-                    <h2 class="text-xl font-semibold text-gray-700 mt-6 mb-4 text-center">Empleado Menos Cumplidor</h2>
+                    <h2 class="bg-white dark:bg-gray-800  mt-6 mb-4 text-center">Empleado Menos Cumplidor</h2>
                     <p class="text-lg text-center text-purple-700 font-bold">{{ $empleadoMenosCumplio->name ?? 'No hay empleados evaluados' }}</p>
 
                     <!-- Estrategias de mejora -->
                     @if ($estrategias)
-                        <h2 class="text-xl font-semibold text-gray-700 mt-6 mb-4 text-center">Estrategias de Mejora</h2>
+                        <h2 class="bg-white dark:bg-gray-800  mt-6 mb-4 text-center">Estrategias de Mejora</h2>
                         <p class="text-lg text-center text-red-700">{{ $estrategias }}</p>
                     @endif
 

@@ -40,5 +40,7 @@ class ConsumoEnergiaController extends Controller
         $consumos = ConsumoEnergia::orderBy('fecha', 'desc')->get(); // Obtener todos los registros
         return view('consumoenergia.reportes', compact('consumos')); // Pasar los datos a la vista 'reportes'
     }
+   
+    
 }
 

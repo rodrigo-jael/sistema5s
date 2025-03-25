@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
+    <div class="w-full max-w-md bg-white dark:bg-gray-800  shadow-lg rounded-lg p-8">
         <!-- Logo de Jorial -->
         <div class="flex justify-center mb-6">
             <img src="{{ ('storage/images/logojorial.png') }}" alt="" class="w-32 h-auto">
