@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '5c9eb16b0a762f2e1d2b549e18b201d96c7b02c2',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '83b7d5bee9da70d81f239a10208c7cba0d0c50a9',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -102,6 +102,15 @@
             'install_path' => __DIR__ . '/../egulias/email-validator',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'enlightn/security-checker' => array(
+            'pretty_version' => 'v2.0.0',
+            'version' => '2.0.0.0',
+            'reference' => 'd495ab07639388c7c770c5223aa0d42fee1d2604',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../enlightn/security-checker',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'ezyang/htmlpurifier' => array(
             'pretty_version' => 'v4.18.0',
@@ -422,9 +431,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '5c9eb16b0a762f2e1d2b549e18b201d96c7b02c2',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '83b7d5bee9da70d81f239a10208c7cba0d0c50a9',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
