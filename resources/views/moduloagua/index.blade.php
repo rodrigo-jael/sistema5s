@@ -12,8 +12,8 @@
         <!-- Logo de la empresa en la parte superior derecha -->
         <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto ml-auto">
         
-        <a href="{{ route('welcome2') }}" class="bg-red-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
-            Salir
+        <a href="{{ route('welcome2') }}" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
+            Regresar
         </a>
     </div>
 
@@ -32,13 +32,13 @@
                 <!-- Botón para Iniciar Registro -->
                 <a href="{{ route('consumo_agua.index2') }}" 
                    class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 flex items-center gap-2">
-                    📋 Iniciar Registro
+                     Iniciar Registro
                 </a>
 
                 <!-- Botón para Ver Reportes -->
                 <a href="{{ route('consumo_agua.show') }}" 
                    class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 flex items-center gap-2">
-                    📊 Ver Reportes
+                    Ver Reportes
                 </a>
             </div>
         </div>

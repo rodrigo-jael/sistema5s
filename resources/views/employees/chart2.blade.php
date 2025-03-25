@@ -1,18 +1,17 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Gráfica de Evaluación 5S') }}
-        </h2>
+<x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="bg-white dark:bg-gray-800  leading-tight">Grafica de Evaluación 5S</h2>
+            <a href="{{ route('welcome') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12 flex flex-col items-center">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col items-center">
                 
-                <!-- Mover el botón "Regresar" aquí -->
-                <a href="{{ route('welcome') }}" class="mb-6 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                    Regresar
-                </a>
 
                 <h3 class="text-lg font-semibold mb-4">Resultados del {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}</h3>
 

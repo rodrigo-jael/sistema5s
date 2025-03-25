@@ -11,6 +11,9 @@ use App\Http\Controllers\LuzController;
 use App\Http\Controllers\registerluzController;
 use App\Http\Controllers\ConsumoLuzController;
 use App\Http\Controllers\ConsumoEnergiaController;
+use App\Http\Controllers\ConsumoAguaReporteController;
+
+
 use App\Http\Controllers\EquipoController;
 
 
@@ -66,7 +69,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/consumo-agua/create', [ConsumoAguaController::class, 'create'])->name('consumo_agua.create');
     Route::post('/consumo-agua', [ConsumoAguaController::class, 'store'])->name('consumo_agua.store');
-    Route::get('consumo_agua/show', [ConsumoAguaController::class, 'show'])->name('consumo_agua.show');
+    Route::get('consumo_agua/show', [ConsumoAguaReporteController::class,  'show'])->name('consumo_agua.show');
     Route::delete('/consumo-agua/{id}', [ConsumoAguaController::class, 'destroy'])->name('consumo_agua.destroy');
 
                       
@@ -74,6 +77,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/luz', [LuzController::class, 'index'])->name('luz.index');
    
+    Route::resource('consumoenergia', ConsumoEnergiaController::class);
+    //Route::get('/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes'); // Para ver los reportes
     Route::get('/consumoenergia', [ConsumoEnergiaController::class, 'index'])->name('consumoenergia.index');
     Route::resource('consumoenergia', ConsumoEnergiaController::class)->except(['show']);
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
@@ -82,5 +87,7 @@ Route::middleware('auth')->group(function () {
     
 
 });
+
+ 
 
 require __DIR__.'/auth.php';
