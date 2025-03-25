@@ -42,8 +42,11 @@
                  Inicia Registro
                </a>
                <a href="{{ route('consumoenergia.reportes') }}" class="bg-yellow-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300">
-                Ver Reportes
-            </a>            
+                   Ver Reportes
+               </a>            
+                <a href="" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300">
+                  Historial de Equipos
+                </a>            
             </div>
 
         </div>

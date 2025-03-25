@@ -29,6 +29,18 @@
 
                         <div class="mt-4">
                             <div class="mb-4">
+                                <label for="equipo" class="block text-sm font-medium text-gray-700">Equipo</label>
+                                <input type="text" name="equipo" id="equipo" value="Monitor de 17 pulg" class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-not-allowed" readonly>             
+                            </div>
+                            
+
+                            <label class="block text-sm font-medium text-gray-700">Imagen</label>
+                            <div class="mt-1 border border-gray-300 rounded-md p-2 shadow-sm">
+                                <img src="/storage/images/Monitor1.png" alt="Ejemplo de equipo" class="w-50 h-40 rounded-md">
+                            </div>
+
+
+                            <div class="mb-4">
                                 <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
                                 <input type="date" name="fecha" id="fecha" value="{{ old('fecha') }}" class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                 @error('fecha')
