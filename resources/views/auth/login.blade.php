@@ -1,59 +1,42 @@
 <x-guest-layout>
-    <div class="w-full max-w-md bg-white dark:bg-gray-800  shadow-lg rounded-lg p-8">
-        <!-- Logo de Jorial -->
-        <div class="flex justify-center mb-6">
-            <img src="{{ ('storage/images/logojorial.png') }}" alt="" class="w-32 h-auto">
-        </div>
-
-        <h2 class="text-3xl font-bold text-black-700 text-center">Iniciar Sesión</h2>
-        
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Correo')" class="text-black-700" />
-                <x-text-input id="email" class="block mt-1 w-full border-gray-300 rounded-lg shadow-sm" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
+    <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 border-t-4 border-yellow-500">
+            
+            <!-- Logo -->
+            <div class="flex justify-center mb-4">
+                <img src="{{ asset('storage/images/logojorial.png') }}" alt="QMS Logo" class="w-24 h-auto">
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Contraseña')" class="text-black-700" />
-                <x-text-input id="password" class="block mt-1 w-full border-gray-300 rounded-lg shadow-sm" type="password" name="password" required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
-            </div>
+            <h2 class="text-2xl font-semibold text-center text-gray-800 dark:text-gray-200">INICIAR SESIÓN</h2>
+            <p class="text-center text-sm text-yellow-600 font-semibold mb-4">BIENVENIDO, INTRODUCE TUS CREDENCIALES</p>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-black-600 shadow-sm focus:ring-black-500" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Recuerdame') }}</span>
-                </label>
-            </div>
+            <!-- Session Status -->
+            <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <div class="flex flex-col items-center mt-6 space-y-4">
-                <x-primary-button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow-md w-full">
-                    {{ __('Log in') }}
-                </x-primary-button>
+            <form method="POST" action="{{ route('login') }}" class="space-y-4">
+                @csrf
 
-                <div class="flex justify-between w-full text-sm text-gray-600">
-                    @if (Route::has('password.request'))
-                        <a class="underline hover:text-purple-700" href="{{ route('password.request') }}">
-                            {{ __('Olvidaste tu contraseña?') }}
-                        </a>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <a class="underline hover:text-purple-700" href="{{ route('register') }}">
-                            {{ __('Registro') }}
-                        </a>
-                    @endif
+                <!-- Email -->
+                <div>
+                    <x-input-label for="email" :value="__('Email')" class="text-gray-700 dark:text-gray-300" />
+                    <input id="email" class="block w-full py-2 border-b-2 border-gray-400     focus:outline-none focus:border-yellow-500 bg-transparent text-gray-800 dark:text-gray-200" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
                 </div>
-            </div>
-        </form>
+
+                <!-- Password -->
+                <div>
+                    <x-input-label for="password" :value="__('Contraseña')" class="text-gray-700 dark:text-gray-300" />
+                    <input id="password" class="block w-full py-2 border-b-2 border-gray-400 focus:outline-none focus:border-yellow-500 bg-transparent text-gray-800 dark:text-gray-200" type="password" name="password" required autocomplete="current-password" />
+                    <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-md shadow-md">Ingresar</button>
+                </div>
+            </form>
+
+            <p class="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">Si tienes problemas contacta al área de sistemas: <a href="mailto:soporte@qms.com.mx" class="text-yellow-700 underline">soporte@qms.com.mx</a></p>
+        </div>
     </div>
 </x-guest-layout>
