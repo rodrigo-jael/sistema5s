@@ -12,6 +12,9 @@ use App\Http\Controllers\registerluzController;
 use App\Http\Controllers\ConsumoLuzController;
 use App\Http\Controllers\ConsumoEnergiaController;
 use App\Http\Controllers\ConsumoAguaReporteController;
+use App\Http\Controllers\EmployeePhotoController;
+use App\Http\Controllers\EvaluationController;
+
 
 
 use App\Http\Controllers\EquipoController;
@@ -83,6 +86,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('consumoenergia', ConsumoEnergiaController::class)->except(['show']);
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
   
+
+
+    Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
+    Route::get('/evaluaciones/{id}/foto', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
+
+
+    
 
     
 

@@ -12,7 +12,7 @@
         <!-- Logo de la empresa en la parte superior derecha -->
         <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto ml-auto">
 
-        <a href="{{ route('welcome2') }}" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
+        <a href="{{ route('welcome2') }}" class="bg-[#D5AC5B] text-black px-6 py-3 rounded-md shadow-md transition duration-300">
                Regresar
         </a>
 
@@ -22,19 +22,19 @@
     <div class="relative w-full max-w-5xl bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 flex flex-col md:flex-row items-center mt-20">
         <!-- Contenido de bienvenida -->
         <div class="md:w-1/2 text-center md:text-left">
-            <h1 class="text-4xl font-bold text-blue-600">BIENVENIDO</h1>
-            <p class="text-yellow-500 text-lg font-semibold mt-2">Metodología 5S</p>
+            <h1 class="text-4xl font-bold text-black">Metodología 5s</h1>
+                        
             <p class="text-gray-600 mt-4 bg-white dark:bg-gray-800 ">
                 Optimiza tu entorno de trabajo aplicando la metodología 5S para mejorar la eficiencia y organización.
             </p>
             <div class="mt-6 flex flex-col sm:flex-row sm:space-x-4 gap-4 justify-center md:justify-start">
-                <a href="/login" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 w-full sm:w-auto text-center">
+                <a href="/login" class="bg-[#D5AC5B] text-black px-6 py-3 rounded-md shadow-md  duration-300 w-full sm:w-auto text-center">
                     Iniciar Registro 
                 </a>
-                <a href="/grafica" class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300 w-full sm:w-auto text-center">
+                <a href="/grafica" class="bg-[#D5AC5B] text-black px-6 py-3 rounded-md shadow-md  duration-300 w-full sm:w-auto text-center">
                      Ver Evaluaciones
                 </a>
-                <a href="{{ route('reportes.index') }}" class="bg-yellow-500 text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-600 transition duration-300 w-full sm:w-auto text-center">
+                <a href="{{ route('reportes.index') }}" class="bg-[#D5AC5B] text-black  px-6 py-3 rounded-md shadow-md  duration-300 w-full sm:w-auto text-center">
                      Ver Reportes
                  </a>
             </div>
