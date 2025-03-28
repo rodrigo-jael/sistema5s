@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
+        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center" style="color: #D5AC5B;">
             {{ __('Registrar Consumo de Energía') }}
         </h2>
     </x-slot>
@@ -19,27 +19,17 @@
                     <form method="POST" action="{{ route('consumoenergia.store') }}">
                         @csrf
                         <div class="mt-4 flex justify-between items-center">
-                            <h3 class="text-lg font-semibold">Registrar Consumo de Energía</h3>
-                            <div>
-                                <a href="{{ route('luz.index') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+                            <h3 class="text-lg font-semibold" style="color: #D5AC5B">Registrar Consumo de Energía</h3>
+                            <div class="flex justify-end mb-4">
+                                <a href="{{ route('luz.index') }}" 
+                                   class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" 
+                                   style="background-color: #D5AC5B;">
                                     Regresar
                                 </a>
                             </div>
                         </div>
 
-                        <div class="mt-4">
-                            <div class="mb-4">
-                                <label for="equipo" class="block text-sm font-medium text-gray-700">Equipo</label>
-                                <input type="text" name="equipo" id="equipo" value="Monitor de 17 pulg" class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-not-allowed" readonly>             
-                            </div>
-                            
-
-                            <label class="block text-sm font-medium text-gray-700">Imagen</label>
-                            <div class="mt-1 border border-gray-300 rounded-md p-2 shadow-sm">
-                                <img src="/storage/images/Monitor1.png" alt="Ejemplo de equipo" class="w-50 h-40 rounded-md">
-                            </div>
-
-
+                       
                             <div class="mb-4">
                                 <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
                                 <input type="date" name="fecha" id="fecha" value="{{ old('fecha') }}" class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -74,7 +64,7 @@
                         </div>
 
                         <div class="mt-4 flex justify-end">
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" style="background-color: #D5AC5B;">
                                 Guardar Registro
                             </button>
                         </div>

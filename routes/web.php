@@ -12,8 +12,6 @@ use App\Http\Controllers\registerluzController;
 use App\Http\Controllers\ConsumoLuzController;
 use App\Http\Controllers\ConsumoEnergiaController;
 use App\Http\Controllers\ConsumoAguaReporteController;
-
-
 use App\Http\Controllers\EquipoController;
 
 
@@ -83,8 +81,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('consumoenergia', ConsumoEnergiaController::class)->except(['show']);
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
   
+    Route::resource('equipos', EquipoController::class);
+    Route::post('/equipos/updateDias', [EquipoController::class, 'updateDias'])->name('equipos.updateDias');
 
-    
 
 });
 

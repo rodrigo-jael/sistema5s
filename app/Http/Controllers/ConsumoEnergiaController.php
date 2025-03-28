@@ -41,6 +41,19 @@ class ConsumoEnergiaController extends Controller
         return view('consumoenergia.reportes', compact('consumos')); // Pasar los datos a la vista 'reportes'
     }
    
+
+    public function show($id)
+{
+    // Código para obtener y devolver el recurso con el ID especificado
+    $consumo = ConsumoEnergia::find($id);
+    
+    if (!$consumo) {
+        return response()->json(['error' => 'Recurso no encontrado'], 404);
+    }
+
+    return response()->json($consumo);
+}
+
     
 }
 
