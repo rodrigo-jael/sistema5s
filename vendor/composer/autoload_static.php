@@ -577,6 +577,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
 
     public static $classMap = array (
         'App\\Exports\\ReportesExport' => __DIR__ . '/../..' . '/app/Exports/ReportesExport.php',
+        'App\\Http\\Controllers\\AguaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AguaController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
         'App\\Http\\Controllers\\Auth\\EmailVerificationNotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/EmailVerificationNotificationController.php',
