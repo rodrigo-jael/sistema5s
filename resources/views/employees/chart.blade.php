@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="bg-white dark:bg-gray-800 leading-tight">Registros de evaluación 5S</h2>
+            <h2 class="bg-white dark:bg-gray-800  leading-tight">Registros de evaluacion 5s</h2>
             <a href="{{ route('welcome') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
                 ← Regresar
             </a>
@@ -42,7 +42,6 @@
                                     <th class="px-4 py-2 text-left">Empleado</th>
                                     <th class="px-4 py-2 text-left">Fecha</th>
                                     <th class="px-4 py-2 text-left">Cumplimiento</th>
-                                    <th class="px-4 py-2 text-left">Foto</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,18 +50,9 @@
                                         <td class="px-4 py-2">{{ $evaluation->employee->name }}</td>
                                         <td class="px-4 py-2">{{ \Carbon\Carbon::parse($evaluation->evaluation_date)->format('d/m/Y') }}</td>
                                         <td class="px-4 py-2">
-                                            <a href="{{ route('evaluaciones.foto', ['id' => $evaluation->id]) }}" class="{{ $evaluation->evaluation_5s == 'cumplio' ? 'text-green-500' : 'text-red-500' }} underline">
+                                            <span class="{{ $evaluation->evaluation_5s == 'cumplio' ? 'text-green-500' : 'text-red-500' }}">
                                                 {{ ucfirst($evaluation->evaluation_5s) }}
-                                            </a>
-                                        </td>
-                                        <td class="px-4 py-2">
-                                            @if ($evaluation->photo_path)
-                                                <a href="{{ asset('storage/' . $evaluation->photo_path) }}" target="_blank" class="text-blue-500 hover:underline">
-                                                    Ver Foto
-                                                </a>
-                                            @else
-                                                <span class="text-gray-500">No disponible</span>
-                                            @endif
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
