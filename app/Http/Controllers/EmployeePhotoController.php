@@ -30,6 +30,10 @@ class EmployeePhotoController extends Controller
     }
 
 
-
+    public function verFoto($id)
+    {
+        $evaluation = Evaluation::findOrFail($id);
+        return view('evaluaciones.foto', compact('evaluation'));
+    }
 
 }

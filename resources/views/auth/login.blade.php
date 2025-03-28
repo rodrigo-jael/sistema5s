@@ -19,7 +19,7 @@
                 <!-- Email -->
                 <div>
                     <x-input-label for="email" :value="__('Email')" class="text-gray-700 dark:text-gray-300" />
-                    <input id="email" class="block w-full py-2 border-b-2 border-gray-400     focus:outline-none focus:border-yellow-500 bg-transparent text-gray-800 dark:text-gray-200" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    <input id="email" class="block w-full py-2 border-b-2 border-gray-400 focus:outline-none focus:border-yellow-500 bg-transparent text-gray-800 dark:text-gray-200" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
                 </div>
 
@@ -35,6 +35,14 @@
                     <button type="submit" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-md shadow-md">Ingresar</button>
                 </div>
             </form>
+
+            <!-- Register Link -->
+            <div class="text-center mt-4">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ¿No tienes una cuenta? 
+                    <a href="{{ route('register') }}" class="text-yellow-700 underline">Regístrate aquí</a>
+                </p>
+            </div>
 
             <p class="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">Si tienes problemas contacta al área de sistemas: <a href="mailto:soporte@qms.com.mx" class="text-yellow-700 underline">soporte@qms.com.mx</a></p>
         </div>
