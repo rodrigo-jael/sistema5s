@@ -1,3 +1,6 @@
+actualiza entonces mi vista 
+
+
 <x-app-layout>
 <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -50,17 +53,15 @@
                                                 <span class="ml-2 text-red-600">✖</span>
                                             </label>
 
-                                            <!-- Lupa con Tooltip y Captura de Foto -->
+                                            <!-- Lupa con Tooltip -->
                                             <div class="relative group">
-                                                <button type="button" class="text-blue-500 text-xl hover:scale-110 transition-transform relative z-10 open-camera" data-id="{{ $employee->id }}">
+                                                <a href="{{ route('employee.view', $employee->id) }}" class="text-blue-500 text-xl hover:scale-110 transition-transform relative z-10">
                                                     🔍
-                                                </button>
+                                                </a>
                                                 <span class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center pointer-events-none whitespace-nowrap min-w-max">
-                                                    Tomar Foto
+                                                    Ver Eco-Map
                                                 </span>
                                             </div>
-                                            <input type="file" id="foto-{{ $employee->id }}" class="hidden input-foto" accept="image/*" capture="environment">
-                                            <img id="preview-{{ $employee->id }}" class="mt-2 hidden w-32 h-32 object-cover rounded-lg">
                                         </div>
                                     </li>
                                 @empty
@@ -83,34 +84,11 @@
                 input.closest(".employee-item").remove();
             });
 
+            // Verifica si aún hay empleados después de eliminar los seleccionados
             if (document.querySelectorAll(".employee-item").length === 0) {
                 document.getElementById("employee-list").innerHTML = '<li class="text-center text-gray-500">Todos los empleados ya han sido evaluados hoy.</li>';
-                document.getElementById("guardar-btn").style.display = "none";
+                document.getElementById("guardar-btn").style.display = "none"; // Oculta el botón
             }
-        });
-
-        document.querySelectorAll(".open-camera").forEach(button => {
-            button.addEventListener("click", function () {
-                const employeeId = this.getAttribute("data-id");
-                document.getElementById(`foto-${employeeId}`).click();
-            });
-        });
-
-        document.querySelectorAll(".input-foto").forEach(input => {
-            input.addEventListener("change", function (event) {
-                const file = event.target.files[0];
-                const employeeId = this.id.split("-")[1];
-
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const imgPreview = document.getElementById(`preview-${employeeId}`);
-                        imgPreview.src = e.target.result;
-                        imgPreview.classList.remove("hidden");
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
         });
     });
     </script>

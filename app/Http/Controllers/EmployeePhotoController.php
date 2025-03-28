@@ -28,12 +28,4 @@ class EmployeePhotoController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Foto guardada', 'photo' => $photo]);
     }
-
-
-    public function verFoto($id)
-    {
-        $evaluation = Evaluation::findOrFail($id);
-        return view('evaluaciones.foto', compact('evaluation'));
-    }
-
 }
