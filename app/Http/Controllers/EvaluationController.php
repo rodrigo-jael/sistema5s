@@ -14,4 +14,3 @@ class EvaluationController extends Controller
         return view('evaluaciones.foto', compact('evaluation'));
     }
 }
-}
