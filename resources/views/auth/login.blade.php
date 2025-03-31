@@ -1,50 +1,47 @@
-<x-guest-layout>
-    <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-        <div class="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 border-t-4 border-yellow-500">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - QMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-200">
+    <div class="bg-white shadow-lg rounded-2xl p-6 w-80 text-center relative">
+        
+        <!-- Estilo superior decorativo -->
+        
+        <!-- Logo -->
+        <img src="{{ asset('storage/images/qms.png') }}" alt="QMS Logo" class="w-16 mx-auto mb-4 relative z-10">
+
+        <h2 class="text-lg font-semibold text-gray-700">INICIAR SESIÓN</h2>
+        <p class="text-sm text-gray-500 mb-4">BIENVENIDO, INTRODUCE TUS CREDENCIALES</p>
+        
+        <form method="POST" action="{{ route('login') }}" class="space-y-4">
+            @csrf
             
-            <!-- Logo -->
-            <div class="flex justify-center mb-4">
-                <img src="{{ asset('storage/images/logojorial.png') }}" alt="QMS Logo" class="w-24 h-auto">
+            <!-- Email -->
+            <div class="text-left">
+                <label for="email" class="block text-sm font-medium text-gray-600">Correo Electrónico</label>
+                <input id="email" type="email" name="email" required autofocus 
+                    class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-yellow-500">
             </div>
 
-            <h2 class="text-2xl font-semibold text-center text-gray-800 dark:text-gray-200">INICIAR SESIÓN</h2>
-            <p class="text-center text-sm text-yellow-600 font-semibold mb-4">BIENVENIDO, INTRODUCE TUS CREDENCIALES</p>
-
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-
-            <form method="POST" action="{{ route('login') }}" class="space-y-4">
-                @csrf
-
-                <!-- Email -->
-                <div>
-                    <x-input-label for="email" :value="__('Email')" class="text-gray-700 dark:text-gray-300" />
-                    <input id="email" class="block w-full py-2 border-b-2 border-gray-400 focus:outline-none focus:border-yellow-500 bg-transparent text-gray-800 dark:text-gray-200" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
-                </div>
-
-                <!-- Password -->
-                <div>
-                    <x-input-label for="password" :value="__('Contraseña')" class="text-gray-700 dark:text-gray-300" />
-                    <input id="password" class="block w-full py-2 border-b-2 border-gray-400 focus:outline-none focus:border-yellow-500 bg-transparent text-gray-800 dark:text-gray-200" type="password" name="password" required autocomplete="current-password" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
-                </div>
-
-                <!-- Submit Button -->
-                <div class="mt-6">
-                    <button type="submit" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-md shadow-md">Ingresar</button>
-                </div>
-            </form>
-
-            <!-- Register Link -->
-            <div class="text-center mt-4">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                    ¿No tienes una cuenta? 
-                    <a href="{{ route('register') }}" class="text-yellow-700 underline">Regístrate aquí</a>
-                </p>
+            <!-- Contraseña -->
+            <div class="text-left">
+                <label for="password" class="block text-sm font-medium text-gray-600">Contraseña</label>
+                <input id="password" type="password" name="password" required 
+                    class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-yellow-500">
             </div>
 
-            <p class="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">Si tienes problemas contacta al área de sistemas: <a href="mailto:soporte@qms.com.mx" class="text-yellow-700 underline">soporte@qms.com.mx</a></p>
-        </div>
+            <!-- Botón de Ingreso -->
+            <button type="submit" class="w-full bg-[#D5AC5B]  text-white py-2 rounded-md shadow-md font-semibold">Ingresar</button>
+        </form>
+        
+        <!-- Enlace de registro -->
+        <p class="text-sm text-gray-600 mt-4">¿No tienes cuenta? 
+            <a href="{{ route('register') }}" class="text-blue-500 font-semibold">Crear cuenta</a>
+        </p>
     </div>
-</x-guest-layout>
+</body>
+</html>

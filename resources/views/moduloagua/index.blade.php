@@ -10,9 +10,9 @@
     <!-- Contenedor para el encabezado con el logo -->
     <div class="w-full flex justify-between items-center p-4 absolute top-0 left-0 right-0">
         <!-- Logo de la empresa en la parte superior derecha -->
-        <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto ml-auto">
+        <img src="{{ asset('storage/images/logojorial.png') }}" alt="Logo de la empresa" class="w-40 h-auto absolute top-4 left-4">
         
-        <a href="{{ route('welcome2') }}" class="bg-[#D5AC5B] text-black px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
+        <a href="{{ route('welcome2') }}" class="bg-[#D5AC5B] text-black px-6 py-3 rounded-md shadow-md text-center transition duration-300 w-40 h-auto ml-auto">
             Regresar
         </a>
     </div>
