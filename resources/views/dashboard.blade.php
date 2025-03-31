@@ -1,4 +1,4 @@
-actualiza entonces mi vista 
+
 
 
 <x-app-layout>

@@ -39,7 +39,7 @@ class ConsumoAguaController extends Controller
             'fecha' => $request->fecha,
             'semana' => $semana,
             'litros_consumidos' => $request->litros_consumidos,
-            'litros_maximos' => 450
+            'litros_maximos' => 565
         ]);
 
         return redirect()->route('consumo_agua.index')->with('success', 'Registro guardado correctamente.');

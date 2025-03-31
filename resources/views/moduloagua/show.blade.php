@@ -2,8 +2,8 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Reporte del consumo de agua</h2>
-            <a href="{{ route('consumo_agua.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                ← Regresar
+            <a href="{{ route('consumo_agua.index') }}" class="bg-[#D5AC5B]  text-black font-bold py-2 px-4 rounded">
+                ←Regresar
             </a>
         </div>
     </x-slot>
