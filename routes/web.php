@@ -12,14 +12,12 @@ use App\Http\Controllers\registerluzController;
 use App\Http\Controllers\ConsumoLuzController;
 use App\Http\Controllers\ConsumoEnergiaController;
 use App\Http\Controllers\ConsumoAguaReporteController;
-<<<<<<< HEAD
-=======
+
 use App\Http\Controllers\EmployeePhotoController;
 use App\Http\Controllers\EvaluationController;
 
 
 
->>>>>>> 34ac856 (Cambio de diseño y agrego de fotos)
 use App\Http\Controllers\EquipoController;
 
 
