@@ -12,11 +12,14 @@ use App\Http\Controllers\registerluzController;
 use App\Http\Controllers\ConsumoLuzController;
 use App\Http\Controllers\ConsumoEnergiaController;
 use App\Http\Controllers\ConsumoAguaReporteController;
+<<<<<<< HEAD
 use App\Http\Controllers\EmployeePhotoController;
 use App\Http\Controllers\EvaluationController;
 
 
 
+=======
+>>>>>>> origin/dev-mary
 use App\Http\Controllers\EquipoController;
 
 
@@ -86,7 +89,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('consumoenergia', ConsumoEnergiaController::class)->except(['show']);
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
   
+    Route::resource('equipos', EquipoController::class);
+    Route::post('/equipos/updateDias', [EquipoController::class, 'updateDias'])->name('equipos.updateDias');
+    Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
 
+<<<<<<< HEAD
 
     Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
     Route::get('/evaluaciones/foto/{id}', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
@@ -95,6 +102,8 @@ Route::middleware('auth')->group(function () {
     
 
     
+=======
+>>>>>>> origin/dev-mary
 
 });
 
