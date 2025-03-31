@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
   
     Route::resource('equipos', EquipoController::class);
     Route::post('/equipos/updateDias', [EquipoController::class, 'updateDias'])->name('equipos.updateDias');
+    Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
 
 
 });

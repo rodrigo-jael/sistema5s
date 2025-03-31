@@ -18,14 +18,20 @@
                     @endif
 
                     <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Días de Uso de Equipos</h3>
-                    <div class="flex justify-end mb-4">
+                    <div class="flex justify-between mb-4">
                         <a href="{{ route('luz.index') }}" 
                            class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" 
                            style="background-color: #D5AC5B;">
                             Regresar
                         </a>
+                        <a href="#" onclick="openModal()" 
+                              class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
+                               style="background-color: #D5AC5B;">
+                                  Nuevo
+                        </a>
                     </div>
-                    
+                    @include('equipos.modal')
+
                     <form method="POST" action="{{ route('equipos.updateDias') }}" >
                         @csrf
                         @method('POST')
@@ -44,9 +50,9 @@
                                         <th class="border p-2">Jue</th>
                                         <th class="border p-2">Vie</th>
                                         <th class="border p-2">Sáb</th>
-                                     
                                         <th class="border p-2">Días Encendidos</th>
                                         <th class="border p-2">Consumo Total</th>
+                                        <th class="border p-2">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,6 +84,12 @@
 
                                             <td class="border p-2">{{ $equipo->dias_utilizados }}</td>
                                             <td class="border p-2">{{ $equipo->consumo_total }} kWh</td>
+
+                                            <td class="border p-2">
+                                                <a href="{{ route('equipos.edit', $equipo->id) }}" 
+                                                   class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-500">Editar
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -26,7 +26,7 @@ class EquipoSeeder extends Seeder
             [
                 'nombre' => 'CPU Hp Mini torre fuente de 500',
                 'ubicacion' => 'Oficina',
-                'imagen' => '',
+                'imagen' => 'equipos/CPUHpminitorre.jpeg',
                 'consumo_promedio' => 1.35,
                 'lunes' => false,
                 'martes' => false,
@@ -36,6 +36,8 @@ class EquipoSeeder extends Seeder
                 'sabado' => false,
                 'domingo' => false,
             ]
+            
+
         ];
 
         foreach ($equipos as &$equipo) {
