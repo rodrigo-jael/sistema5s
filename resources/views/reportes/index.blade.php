@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="bg-white dark:bg-gray-800 leading-tight">Reportes de Evaluación 5S</h2>
-            <a href="{{ route('welcome') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('welcome') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
                 ← Regresar
             </a>
         </div>
@@ -36,7 +36,7 @@
                             <p class="text-lg font-semibold">Total Evaluaciones</p>
                             <p class="text-2xl font-bold">{{ $totalEvaluaciones }}</p>
                         </div>
-                        <div class="bg-green-500 text-white p-4 rounded-lg">
+                        <div class="bg-[#009975] text-white p-4 rounded-lg">
                             <p class="text-lg font-semibold">Cumplió</p>
                             <p class="text-2xl font-bold">{{ $totalCumplio }}</p>
                             <p class="text-sm">{{ $porcentajeCumplio }}%</p>
@@ -90,7 +90,7 @@
                     <!-- Botón para exportar a Excel -->
                     <div class="mt-6 text-center">
                         <a href="{{ route('reportes.export') }}" 
-                           class="bg-purple-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-purple-600 transition duration-300">
+                           class="bg-[#D5AC5B] text-black px-6 py-3 rounded-lg shadow-md hover:bg-purple-600 transition duration-300">
                             Exportar a Excel
                         </a>
                     </div>

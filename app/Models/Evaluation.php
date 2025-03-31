@@ -9,7 +9,7 @@ class Evaluation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employee_id', 'evaluation_5s', 'evaluation_date'];
+    protected $fillable = ['employee_id', 'evaluation_5s', 'evaluation_date', 'photo_path'];
 
     public function employee()
     {

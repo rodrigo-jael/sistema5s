@@ -2,7 +2,7 @@
 <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="bg-white dark:bg-gray-800  leading-tight">Grafica de Evaluación 5S</h2>
-            <a href="{{ route('welcome') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('welcome') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
                 ← Regresar
             </a>
         </div>
