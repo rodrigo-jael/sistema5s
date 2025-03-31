@@ -1,8 +1,14 @@
+
+
+
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
-            {{ __('Lista de Empleados') }}
-        </h2>
+<x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="bg-white dark:bg-gray-800 leading-tight">Lista de empleados</h2>
+            <a href="{{ route('welcome') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -24,13 +30,11 @@
                             <h3 class="text-lg font-semibold">Evaluación de 5S</h3>
                             <div>
                                 @if(count($employees) > 0)
-                                    <button type="submit" id="guardar-btn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                                    <button type="submit" id="guardar-btn" class="bg-[#009975] text-white px-4 py-2 rounded-md ">
                                         Guardar Evaluación
                                     </button>
                                 @endif
-                                <a href="{{ route('welcome') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
-                                    Regresar
-                                </a>
+                                
                             </div>
                         </div>
 
@@ -61,7 +65,7 @@
                                         </div>
                                     </li>
                                 @empty
-                                    <li class="text-center text-gray-500">Todos los empleados ya han sido evaluados hoy.</li>
+                                    <li class="text-center bg-white dark:bg-gray-800 ">Todos los empleados ya han sido evaluados hoy.</li>
                                 @endforelse
                             </ul>
                         </div>

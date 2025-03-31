@@ -1,59 +1,47 @@
-<x-guest-layout>
-    <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
-        <!-- Logo de Jorial -->
-        <div class="flex justify-center mb-6">
-            <img src="{{ ('storage/images/logojorial.png') }}" alt="" class="w-32 h-auto">
-        </div>
-
-        <h2 class="text-3xl font-bold text-purple-700 text-center">Iniciar Sesión</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - QMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-200">
+    <div class="bg-white shadow-lg rounded-2xl p-6 w-80 text-center relative">
         
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <!-- Estilo superior decorativo -->
+        
+        <!-- Logo -->
+        <img src="{{ asset('storage/images/qms.png') }}" alt="QMS Logo" class="w-16 mx-auto mb-4 relative z-10">
 
-        <form method="POST" action="{{ route('login') }}">
+        <h2 class="text-lg font-semibold text-gray-700">INICIAR SESIÓN</h2>
+        <p class="text-sm text-gray-500 mb-4">BIENVENIDO, INTRODUCE TUS CREDENCIALES</p>
+        
+        <form method="POST" action="{{ route('login') }}" class="space-y-4">
             @csrf
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" class="text-purple-700" />
-                <x-text-input id="email" class="block mt-1 w-full border-gray-300 rounded-lg shadow-sm" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
+            
+            <!-- Email -->
+            <div class="text-left">
+                <label for="email" class="block text-sm font-medium text-gray-600">Correo Electrónico</label>
+                <input id="email" type="email" name="email" required autofocus 
+                    class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-yellow-500">
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" class="text-purple-700" />
-                <x-text-input id="password" class="block mt-1 w-full border-gray-300 rounded-lg shadow-sm" type="password" name="password" required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
+            <!-- Contraseña -->
+            <div class="text-left">
+                <label for="password" class="block text-sm font-medium text-gray-600">Contraseña</label>
+                <input id="password" type="password" name="password" required 
+                    class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-yellow-500">
             </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-purple-600 shadow-sm focus:ring-purple-500" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex flex-col items-center mt-6 space-y-4">
-                <x-primary-button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md w-full">
-                    {{ __('Log in') }}
-                </x-primary-button>
-
-                <div class="flex justify-between w-full text-sm text-gray-600">
-                    @if (Route::has('password.request'))
-                        <a class="underline hover:text-purple-700" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <a class="underline hover:text-purple-700" href="{{ route('register') }}">
-                            {{ __('Register') }}
-                        </a>
-                    @endif
-                </div>
-            </div>
+            <!-- Botón de Ingreso -->
+            <button type="submit" class="w-full bg-[#D5AC5B]  text-white py-2 rounded-md shadow-md font-semibold">Ingresar</button>
         </form>
+        
+        <!-- Enlace de registro -->
+        <p class="text-sm text-gray-600 mt-4">¿No tienes cuenta? 
+            <a href="{{ route('register') }}" class="text-blue-500 font-semibold">Crear cuenta</a>
+        </p>
     </div>
-</x-guest-layout>
+</body>
+</html>

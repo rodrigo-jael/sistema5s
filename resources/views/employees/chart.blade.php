@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center">
-            {{ __('Registros de Evaluación 5S') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="bg-white dark:bg-gray-800  leading-tight">Registros de evaluacion 5s</h2>
+            <a href="{{ route('welcome') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12 flex flex-col items-center">
@@ -20,12 +23,10 @@
                                 </option>
                             @endforeach
                         </select>
-                        <a href="{{ route('welcome') }}" class="bg-green-500 text-black px-6 py-2 rounded-md text-lg hover:bg-blue-600 transition">
-                            Regresar
-                        </a>
+                        
                         @if(request()->date)
                         <a href="{{ route('employees.chart2', ['date' => request()->date]) }}" 
-                            class="bg-yellow-500 text-black px-6 py-2 rounded-md text-lg hover:bg-yellow-600 transition">
+                            class="bg-green-500 text-white px-6 py-2 rounded-md text-lg hover:bg-green-600 transition">
                             Ver Gráfica
                         </a>
                         @endif
