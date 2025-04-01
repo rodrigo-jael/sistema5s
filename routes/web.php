@@ -91,8 +91,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/equipos/updateDias', [EquipoController::class, 'updateDias'])->name('equipos.updateDias');
     Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
 
-<<<<<<< HEAD
-=======
 
     Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
     Route::get('/evaluaciones/foto/{id}', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
@@ -101,7 +99,6 @@ Route::middleware('auth')->group(function () {
     
 
     
->>>>>>> 34ac856 (Cambio de diseño y agrego de fotos)
 
 });
 

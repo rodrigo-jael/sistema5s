@@ -62,7 +62,7 @@ class EquipoController extends Controller
         $imagenPath = null;
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('equipos', 'public');
-            dd($imagenPath);
+            
         }
     
         // Crear el equipo en la base de datos
@@ -76,3 +76,4 @@ class EquipoController extends Controller
         return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
     }
 }
+
