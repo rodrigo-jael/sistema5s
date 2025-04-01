@@ -8,7 +8,6 @@
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4">Reportes de Consumo de Energía</h1>
 
-       
         <div class="flex justify-end mb-4">
             <a href="{{ route('luz.index') }}" class="bg-red-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300">
                 Regresar
@@ -34,6 +33,13 @@
                     <td class="p-2">{{ $consumo->kwh_presupuestado - $consumo->kwh_consumidos }}</td>
                 </tr>
                 @endforeach
+
+                <!-- Fila de Total General -->
+                <tr class="bg-gray-200 font-bold">
+                    <td class="p-2 text-center" colspan="2">Total Consumo General</td>
+                    <td class="p-2 text-center">{{ $totalConsumoGeneral }} kWh</td>
+                    <td class="p-2"></td>
+                </tr>
             </tbody>
         </table>
     </div>

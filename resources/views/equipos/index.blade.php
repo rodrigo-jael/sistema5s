@@ -86,10 +86,13 @@
                                             <td class="border p-2">{{ $equipo->consumo_total }} kWh</td>
 
                                             <td class="border p-2">
-                                                <a href="{{ route('equipos.edit', $equipo->id) }}" 
-                                                   class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-500">Editar
+                                                <a href="{{ route('equipos.eliminar', $equipo->id) }}" 
+                                                   class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600" 
+                                                   onclick="return confirm('¿Estás seguro de eliminar este equipo?');">
+                                                    Eliminar
                                                 </a>
                                             </td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>
