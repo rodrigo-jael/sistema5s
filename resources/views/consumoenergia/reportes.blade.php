@@ -1,18 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-blue-600 dark:text-blue-400 leading-tight text-center" style="color: #D5AC5B;">
-            {{ __('Historial de Consumo de Energía') }}
-        </h2>
+    <div class="flex justify-between items-center">
+            <h2 class="bg-white dark:bg-gray-800 leading-tight">Historial de Consumo de Energia</h2>
+            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4" style="color: #D5AC5B;">Reportes de Consumo de Energía</h1>
 
-        <div class="flex justify-end mb-4">
-            <a href="{{ route('luz.index') }}" class="bg-red-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition duration-300"  style="background-color: #D5AC5B;">
-                Regresar
-            </a>
-        </div>
+        
 
         <!-- Tabla de registros -->
         <table class="w-full bg-white shadow-md rounded">

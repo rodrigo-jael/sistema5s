@@ -1,9 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl leading-tight text-center" style="color: #D5AC5B;">
-            {{ __('Gestión Diaria de Equipos') }}
-        </h2>
-        
+        <div class="flex justify-between items-center">
+            <h2 class="bg-white dark:bg-gray-800 leading-tight">Gestion Diaria de Equipos</h2>
+            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
+                ← Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -16,28 +18,22 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    
 
                     <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Chequeo</h3>
                     <div class="flex justify-between mb-4">
-                        <a href="{{ route('luz.index') }}" 
-                           class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" 
-                           style="background-color: #D5AC5B;">
-                            Regresar
-                        </a>
                         <a href="#" onclick="openModal()" 
-                              class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
-                               style="background-color: #D5AC5B;">
-                                  Nuevo
+                            class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
+                            style="background-color: #D5AC5B;">
+                            Nuevo
                         </a>
                     </div>
                     @include('equipos.modal')
 
-                    <form method="POST" action="{{ route('equipos.updateDias') }}" >
+                    <form method="POST" action="{{ route('equipos.updateDias') }}">
                         @csrf
 
-                        <div class="overflow-x-auto" >
-                            <table class="w-full border-collapse border border-gray-300" >
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300">
                                 <thead style="background-color: #D5AC5B;">
                                     <tr class="text-center">
                                         <th class="border p-2">Equipo</th>
@@ -56,7 +52,6 @@
                                     </tr>
                                 </thead>
                                 
-                                
                                 <tbody>
                                     @foreach($equipos as $equipo)
                                         <tr class="text-center">
@@ -68,9 +63,7 @@
                                                     Sin imagen
                                                 @endif
                                             </td>
-                                            
                                             <td class="border p-2">{{ $equipo->ubicacion }}</td>
-                                        
                                             <td class="border p-2">{{ $equipo->consumo_promedio }} kWh</td>
 
                                             @php
@@ -94,7 +87,6 @@
                                                     Eliminar
                                                 </a>
                                             </td>
-                                            
                                         </tr>
                                     @endforeach
                                 </tbody>
