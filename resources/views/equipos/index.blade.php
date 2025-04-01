@@ -18,7 +18,7 @@
                     @endif
                     
 
-                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Días de Uso de Equipos</h3>
+                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Chequeo</h3>
                     <div class="flex justify-between mb-4">
                         <a href="{{ route('luz.index') }}" 
                            class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" 
@@ -38,8 +38,8 @@
 
                         <div class="overflow-x-auto" >
                             <table class="w-full border-collapse border border-gray-300" >
-                                <thead >
-                                    <tr class="bg-gray-200 text-center">
+                                <thead style="background-color: #D5AC5B;">
+                                    <tr class="text-center">
                                         <th class="border p-2">Equipo</th>
                                         <th class="border p-2">Imagen</th>
                                         <th class="border p-2">Ubicación</th>
@@ -55,6 +55,8 @@
                                         <th class="border p-2">Acciones</th>
                                     </tr>
                                 </thead>
+                                
+                                
                                 <tbody>
                                     @foreach($equipos as $equipo)
                                         <tr class="text-center">
