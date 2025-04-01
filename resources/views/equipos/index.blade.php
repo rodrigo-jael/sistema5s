@@ -16,6 +16,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    
 
                     <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Días de Uso de Equipos</h3>
                     <div class="flex justify-between mb-4">
@@ -34,7 +35,6 @@
 
                     <form method="POST" action="{{ route('equipos.updateDias') }}" >
                         @csrf
-                        @method('POST')
 
                         <div class="overflow-x-auto" >
                             <table class="w-full border-collapse border border-gray-300" >

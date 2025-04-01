@@ -37,16 +37,16 @@
                 @if(request()->date)
                     <div class="overflow-x-auto w-full mt-6">
                         <table class="w-full table-auto">
-                            <thead class="bg-gray-200 dark:bg-gray-700">
+                            <thead class="bg-[#D5AC5B] dark:bg-gray-700">
                                 <tr>
-                                    <th class="px-4 py-2 text-left">Empleado</th>
-                                    <th class="px-4 py-2 text-left">Fecha</th>
-                                    <th class="px-4 py-2 text-left">Cumplimiento</th>
+                                    <th class="px-4 py-2 text-center text-white">Empleado</th>
+                                    <th class="px-4 py-2 text-center text-white">Fecha</th>
+                                    <th class="px-4 py-2 text-center text-white">Cumplimiento</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($evaluations as $evaluation)
-                                    <tr class="bg-white dark:bg-gray-800 border-b">
+                                    <tr class="bg-white dark:bg-gray-800 border-b text-center">
                                         <td class="px-4 py-2">{{ $evaluation->employee->name }}</td>
                                         <td class="px-4 py-2">{{ \Carbon\Carbon::parse($evaluation->evaluation_date)->format('d/m/Y') }}</td>
                                         <td class="px-4 py-2">

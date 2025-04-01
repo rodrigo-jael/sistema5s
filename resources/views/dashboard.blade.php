@@ -1,6 +1,3 @@
-
-
-
 <x-app-layout>
 <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -22,7 +19,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('employees.evaluation') }}">
+                    <form method="POST" action="{{ route('employees.evaluation') }}" id="evaluation-form">
                         @csrf
                         <input type="date" name="evaluation_date" id="evaluation_date" value="{{ \Carbon\Carbon::today()->toDateString() }}" hidden>
 
@@ -34,7 +31,6 @@
                                         Guardar Evaluación
                                     </button>
                                 @endif
-                                
                             </div>
                         </div>
 
@@ -69,6 +65,8 @@
                                 @endforelse
                             </ul>
                         </div>
+
+                        <div id="error-message" class="text-red-500 mt-2 hidden">Por favor, selecciona al menos un empleado para evaluar.</div>
                     </form>
                 </div>
             </div>
@@ -79,15 +77,11 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("evaluation_date").value = new Date().toISOString().split("T")[0];
 
-        document.querySelector("form").addEventListener("submit", function () {
-            document.querySelectorAll(".employee-item input:checked").forEach(input => {
-                input.closest(".employee-item").remove();
-            });
-
-            // Verifica si aún hay empleados después de eliminar los seleccionados
-            if (document.querySelectorAll(".employee-item").length === 0) {
-                document.getElementById("employee-list").innerHTML = '<li class="text-center text-gray-500">Todos los empleados ya han sido evaluados hoy.</li>';
-                document.getElementById("guardar-btn").style.display = "none"; // Oculta el botón
+        document.getElementById("evaluation-form").addEventListener("submit", function (event) {
+            let selected = document.querySelectorAll(".employee-item input:checked").length;
+            if (selected === 0) {
+                event.preventDefault();
+                document.getElementById("error-message").classList.remove("hidden");
             }
         });
     });

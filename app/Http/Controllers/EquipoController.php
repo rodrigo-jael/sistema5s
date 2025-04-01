@@ -16,15 +16,16 @@ class EquipoController extends Controller
 
 
     public function updateDias(Request $request)
-  {
-     // Asegurarse de que el formulario ha enviado datos para actualizar
+{
     foreach ($request->dias as $equipoId => $dias) {
-        // Encontrar el equipo por ID
-        $equipo = Equipo::find($equipoId);
-        
-        // Si el equipo no existe, continuar con el siguiente
-        if (!$equipo) {
-            continue;
+        // Buscar el equipo o crear uno nuevo si no existe
+        $equipo = Equipo::find($equipoId) ?? new Equipo();
+
+        // Si es un equipo nuevo, asignar valores por defecto
+        if (!$equipo->exists) {
+            $equipo->nombre = "Equipo Desconocido"; // Puedes cambiar esto según lo que necesites
+            $equipo->ubicacion = "Ubicación Desconocida";
+            $equipo->consumo_promedio = 0;
         }
 
         // Contar los días seleccionados
@@ -33,7 +34,7 @@ class EquipoController extends Controller
                                 ->count();
 
         // Actualizar los días de la semana y el consumo total
-        $equipo->update([
+        $equipo->fill([
             'lunes' => isset($dias['lunes']),
             'martes' => isset($dias['martes']),
             'miercoles' => isset($dias['miercoles']),
@@ -43,10 +44,12 @@ class EquipoController extends Controller
             'dias_utilizados' => $diasSeleccionados,
             'consumo_total' => $equipo->consumo_promedio * $diasSeleccionados,
         ]);
+
+        $equipo->save();
     }
 
-      return redirect()->route('equipos.index')->with('success', 'Días actualizados correctamente.');
-  }
+    return redirect()->route('equipos.index')->with('success', 'Días de uso actualizados correctamente.');
+}
 
 
          public function store(Request $request)

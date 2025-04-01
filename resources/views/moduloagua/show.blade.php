@@ -27,10 +27,10 @@
 
                     <table class="w-full table-auto border-collapse border border-gray-300">
                         <thead>
-                            <tr class="bg-gray-200 text-left">
-                                <th class="border border-gray-300 px-4 py-2">Fecha</th>
-                                <th class="border border-gray-300 px-4 py-2">Litros Utilizados</th>
-                                <th class="border border-gray-300 px-4 py-2">Estado</th>
+                            <tr class="bg-[#D5AC5B] text-center">
+                                <th class="border border-gray-300 px-4 py-2 text-white">Fecha</th>
+                                <th class="border border-gray-300 px-4 py-2 text-white">Litros Utilizados</th>
+                                <th class="border border-gray-300 px-4 py-2 text-white">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
