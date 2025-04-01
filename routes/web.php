@@ -12,12 +12,8 @@ use App\Http\Controllers\registerluzController;
 use App\Http\Controllers\ConsumoLuzController;
 use App\Http\Controllers\ConsumoEnergiaController;
 use App\Http\Controllers\ConsumoAguaReporteController;
-
 use App\Http\Controllers\EmployeePhotoController;
 use App\Http\Controllers\EvaluationController;
-
-
-
 use App\Http\Controllers\EquipoController;
 
 
@@ -81,15 +77,25 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/luz', [LuzController::class, 'index'])->name('luz.index');
    
-    Route::resource('consumoenergia', ConsumoEnergiaController::class);
-    //Route::get('/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes'); // Para ver los reportes
-    Route::get('/consumoenergia', [ConsumoEnergiaController::class, 'index'])->name('consumoenergia.index');
+    // Recurso sin 'show' para evitar errores
     Route::resource('consumoenergia', ConsumoEnergiaController::class)->except(['show']);
+
+    // Ruta específica para reportes
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
+
   
     Route::resource('equipos', EquipoController::class);
     Route::post('/equipos/updateDias', [EquipoController::class, 'updateDias'])->name('equipos.updateDias');
     Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
+    Route::get('/equipos/eliminar/{equipo}', [EquipoController::class, 'eliminar'])->name('equipos.eliminar');
+
+    //Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
+    //Route::get('/evaluaciones/foto/{id}', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
+
+
+    
+
+    
 
 
     Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');

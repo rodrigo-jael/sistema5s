@@ -18,7 +18,7 @@ class EquipoController extends Controller
     public function updateDias(Request $request)
   {
      // Asegurarse de que el formulario ha enviado datos para actualizar
-     foreach ($request->dias as $equipoId => $dias) {
+    foreach ($request->dias as $equipoId => $dias) {
         // Encontrar el equipo por ID
         $equipo = Equipo::find($equipoId);
         
@@ -43,15 +43,15 @@ class EquipoController extends Controller
             'dias_utilizados' => $diasSeleccionados,
             'consumo_total' => $equipo->consumo_promedio * $diasSeleccionados,
         ]);
-       }
+    }
 
       return redirect()->route('equipos.index')->with('success', 'Días actualizados correctamente.');
- }
+  }
 
 
-    public function store(Request $request)
-    {
-        $request->validate([
+         public function store(Request $request)
+        {
+            $request->validate([
             'nombre' => 'required|string|max:255',
             'ubicacion' => 'required|string|max:255',
             'imagen' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
@@ -63,17 +63,37 @@ class EquipoController extends Controller
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('equipos', 'public');
             
+
+            
+
+           // Guardar la imagen si se subió
+           $imagenPath = $request->hasFile('imagen') 
+           ? $request->file('imagen')->store('equipos', 'public') 
+           : null;
+
+          // Crear el equipo en la base de datos
+           Equipo::create([
+          'nombre' => $request->nombre,
+          'ubicacion' => $request->ubicacion,
+          'imagen' => $imagenPath,
+          'consumo_promedio' => $request->consumo,
+           ]);
+
+          return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
         }
-    
-        // Crear el equipo en la base de datos
-        Equipo::create([
-            'nombre' => $request->nombre,
-            'ubicacion' => $request->ubicacion,
-            'imagen' => $imagenPath, // Guardamos solo la ruta relativa
-            'consumo_promedio' => $request->consumo,
-        ]);
-    
-        return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
-    }
+
+        public function eliminar($equipo)
+        {
+            // Encontramos el equipo
+            $equipo = Equipo::findOrFail($equipo);
+
+            // Eliminamos el equipo
+            $equipo->delete();
+
+            // Redirigimos de vuelta a la lista de equipos con un mensaje de éxito
+            return redirect()->route('equipos.index')->with('success', 'Equipo eliminado correctamente.');
+        }
+
 }
 
+}
