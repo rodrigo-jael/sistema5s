@@ -61,7 +61,7 @@
                                             <td class="border p-2">{{ $equipo->nombre }}</td>
                                             <td class="border p-2">
                                                 @if ($equipo->imagen)
-                                                    <img src="{{ asset('storage/equipos/' . $equipo->imagen) }}" alt="Imagen del equipo">
+                                                    <img src="{{ asset('storage/' . $equipo->imagen) }}" width="100">
                                                 @else
                                                     Sin imagen
                                                 @endif

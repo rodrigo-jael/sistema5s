@@ -56,15 +56,7 @@ class EquipoController extends Controller
             'ubicacion' => 'required|string|max:255',
             'imagen' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
             'consumo' => 'required|numeric',
-        ]);
-    
-        // Guardar la imagen si se subió
-        $imagenPath = null;
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('equipos', 'public');
-            
-
-            
+            ]);
 
            // Guardar la imagen si se subió
            $imagenPath = $request->hasFile('imagen') 
@@ -93,7 +85,5 @@ class EquipoController extends Controller
             // Redirigimos de vuelta a la lista de equipos con un mensaje de éxito
             return redirect()->route('equipos.index')->with('success', 'Equipo eliminado correctamente.');
         }
-
-}
 
 }
