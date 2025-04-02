@@ -22,12 +22,17 @@
         
         <!-- Contenido del Módulo Agua -->
         <div class="w-full lg:w-2/3 p-8">
-            <h1 class="text-4xl font-bold text-white-600 mb-8 text-center lg:text-left">Módulo de Energia</h1>
+            <h1 class="text-4xl font-bold text-white-600 mb-8 text-center lg:text-left">Módulo de Energía</h1>
             <p class="text-gray-600 text-lg mb-6">
                 Aquí podrás gestionar todo lo relacionado con el consumo de energia dentro del Sistema QMS.
             </p>
             <!-- Contenedor de los botones -->
             <div class="mt-6 flex justify-center lg:justify-start gap-4">
+                <a href="{{ route('consumoenergia.nuevo') }}" 
+                    class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
+                    style="background-color: #D5AC5B;">
+                    Nuevo
+                </a>
                <a href="{{ route('equipos.index') }}"  class="bg-green-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" style="background-color: #D5AC5B;">
                   Iniciar Registro
                </a>            

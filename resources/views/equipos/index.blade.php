@@ -24,11 +24,7 @@
                            style="background-color: #D5AC5B;">
                             Regresar
                         </a>
-                        <a href="#" onclick="openModal()" 
-                              class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
-                               style="background-color: #D5AC5B;">
-                                  Nuevo
-                        </a>
+                        
                     </div>
                     @include('equipos.modal')
 
@@ -88,11 +84,17 @@
                                             <td class="border p-2">{{ $equipo->consumo_total }} kWh</td>
 
                                             <td class="border p-2">
+                                                <a href="" 
+                                                    class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-red-600" 
+                                                    onclick="return confirm('¿Estás seguro de eliminar este equipo?');">
+                                                     Editar
+                                                 </a>
                                                 <a href="{{ route('equipos.eliminar', $equipo->id) }}" 
                                                    class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600" 
                                                    onclick="return confirm('¿Estás seguro de eliminar este equipo?');">
                                                     Eliminar
                                                 </a>
+                                                
                                             </td>
                                             
                                         </tr>

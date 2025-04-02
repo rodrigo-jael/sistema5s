@@ -57,6 +57,13 @@ class ConsumoEnergiaController extends Controller
         return back()->with('error', 'No hay recibo disponible.');
     }
 
-    
+    public function create()
+    {
+        return view('consumoenergia.nuevo');
+    }
+
+   
+
+
 }
 
