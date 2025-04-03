@@ -62,7 +62,25 @@ class ConsumoEnergiaController extends Controller
         return view('consumoenergia.nuevo');
     }
 
-   
+    public function store(Request $request)
+    {
+        // Validar los datos
+        $request->validate([
+            'fecha' => 'required|date',
+            'equipo' => 'required|string|max:255',
+            'kwh_consumidos' => 'required|numeric|min:0',
+        ]);
+    
+        // Crear un nuevo registro de consumo de energía
+        ConsumoEnergia::create([
+            'fecha' => $request->fecha,
+            'equipo' => $request->equipo,
+            'kwh_consumidos' => $request->kwh_consumidos,
+        ]);
+    
+        return redirect()->route('consumoenergia.reportes')->with('success', 'Consumo de energía registrado correctamente.');
+    }
+    
 
 
 }

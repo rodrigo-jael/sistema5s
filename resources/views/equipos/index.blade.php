@@ -1,9 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl leading-tight text-center" style="color: #D5AC5B;">
-            {{ __('Gestión Diaria de Equipos') }}
-        </h2>
-        
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión Diaria de Energia </h2>
+            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
+                ←Regresar
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -17,23 +19,25 @@
                         </div>
                     @endif
 
-                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Chequeo</h3>
-                    <div class="flex justify-between mb-4">
-                        <a href="{{ route('luz.index') }}" 
-                           class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" 
-                           style="background-color: #D5AC5B;">
-                            Regresar
-                        </a>
-                        
-                    </div>
-                    @include('equipos.modal')
+                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro </h3>
 
-                    <form method="POST" action="{{ route('equipos.updateDias') }}" >
+                    <!-- Menú Desplegable para Filtrar por Ubicación -->
+                    <div class="mb-4 flex items-center">
+                        <label for="filtroUbicacion" class="mr-2 font-semibold text-lg">Filtrar por Ubicación:</label>
+                        <select id="filtroUbicacion" class="border rounded p-2">
+                            <option value="todos">Todos</option>
+                            @foreach($equipos->pluck('ubicacion')->unique() as $ubicacion)
+                                <option value="{{ $ubicacion }}">{{ $ubicacion }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                   
+                    <form method="POST" action="{{ route('equipos.updateDias') }}">
                         @csrf
                         @method('POST')
 
-                        <div class="overflow-x-auto" >
-                            <table class="w-full border-collapse border border-gray-300" >
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300">
                                 <thead style="background-color: #D5AC5B;">
                                     <tr class="text-center">
                                         <th class="border p-2">Equipo</th>
@@ -52,10 +56,9 @@
                                     </tr>
                                 </thead>
                                 
-                                
-                                <tbody>
+                                <tbody id="tablaEquipos">
                                     @foreach($equipos as $equipo)
-                                        <tr class="text-center">
+                                        <tr class="text-center fila-equipo" data-ubicacion="{{ $equipo->ubicacion }}">
                                             <td class="border p-2">{{ $equipo->nombre }}</td>
                                             <td class="border p-2">
                                                 @if ($equipo->imagen)
@@ -85,18 +88,15 @@
 
                                             <td class="border p-2">
                                                 <a href="" 
-                                                    class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-red-600" 
-                                                    onclick="return confirm('¿Estás seguro de eliminar este equipo?');">
+                                                    class="bg-green-500 text-white px-4 py-1 rounded-md hover:bg-red-600">
                                                      Editar
-                                                 </a>
+                                                </a>
                                                 <a href="{{ route('equipos.eliminar', $equipo->id) }}" 
                                                    class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600" 
                                                    onclick="return confirm('¿Estás seguro de eliminar este equipo?');">
                                                     Eliminar
                                                 </a>
-                                                
                                             </td>
-                                            
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -115,4 +115,22 @@
             </div>
         </div>
     </div>
+
+    <!-- Script para Filtrar -->
+    <script>
+        document.getElementById('filtroUbicacion').addEventListener('change', function() {
+            let filtro = this.value.toLowerCase();
+            let filas = document.querySelectorAll('.fila-equipo');
+
+            filas.forEach(fila => {
+                let ubicacion = fila.getAttribute('data-ubicacion').toLowerCase();
+                if (filtro === "todos" || ubicacion === filtro) {
+                    fila.style.display = "";
+                } else {
+                    fila.style.display = "none";
+                }
+            });
+        });
+    </script>
+
 </x-app-layout>
