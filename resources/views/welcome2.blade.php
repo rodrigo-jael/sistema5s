@@ -30,7 +30,7 @@
             </a>
 
             <!-- Tarjeta para Vehículos -->
-            <a href="#" class="bg-[#f8f4ec] p-6 rounded-lg shadow-lg flex flex-col items-center justify-center transition transform hover:scale-105 hover:shadow-xl text-center">
+            <a href="{{ route('vehicular.index') }}" class="bg-[#f8f4ec] p-6 rounded-lg shadow-lg flex flex-col items-center justify-center transition transform hover:scale-105 hover:shadow-xl text-center">
                 <img src="storage/images/vehicular.png" class="w-16 h-16 mb-4" alt="Vehículos">
                 <span class="text-lg font-semibold text-[#D5AC5B]">Control Vehicular</span>
             </a>
