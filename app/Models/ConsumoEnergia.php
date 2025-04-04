@@ -11,5 +11,5 @@ class ConsumoEnergia extends Model
     protected $table = 'consumo_energia'; // Nombre de la tabla
 
     // Los campos que pueden ser llenados de manera masiva
-    protected $fillable = ['fecha', 'mes', 'kwh_consumidos', 'kwh_presupuestado','pdf_recibo'];
+    protected $fillable = ['fecha', 'mes', 'kwh_consumidos', 'kwh_presupuestado','pdf_recibo','fecha_inicio', 'fecha_fin'];
 }

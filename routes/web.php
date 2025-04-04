@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
     Route::post('/consumoenergia/{id}/subirRecibo', [ConsumoEnergiaController::class, 'subirRecibo'])->name('consumoenergia.subirRecibo');
     Route::get('/consumoenergia/{id}/descargarRecibo', [ConsumoEnergiaController::class, 'descargarRecibo'])->name('consumoenergia.descargarRecibo');
+    Route::post('/consumoenergia/store', [ConsumoEnergiaController::class, 'store'])->name('consumoenergia.store');
 
   
     Route::resource('equipos', EquipoController::class);

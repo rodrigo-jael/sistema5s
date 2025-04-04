@@ -69,6 +69,8 @@ class ConsumoEnergiaController extends Controller
             'fecha' => 'required|date',
             'equipo' => 'required|string|max:255',
             'kwh_consumidos' => 'required|numeric|min:0',
+            'fecha_inicio' => 'required|date',
+           'fecha_fin' => 'required|date'
         ]);
     
         // Crear un nuevo registro de consumo de energía
@@ -76,6 +78,8 @@ class ConsumoEnergiaController extends Controller
             'fecha' => $request->fecha,
             'equipo' => $request->equipo,
             'kwh_consumidos' => $request->kwh_consumidos,
+            'fecha_inicio' => 'required|date',
+           'fecha_fin' => 'required|date'
         ]);
     
         return redirect()->route('consumoenergia.reportes')->with('success', 'Consumo de energía registrado correctamente.');
