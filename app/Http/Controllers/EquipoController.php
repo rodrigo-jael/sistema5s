@@ -16,37 +16,42 @@ class EquipoController extends Controller
 
 
     public function updateDias(Request $request)
-  {
-     // Asegurarse de que el formulario ha enviado datos para actualizar
-    foreach ($request->dias as $equipoId => $dias) {
-        // Encontrar el equipo por ID
-        $equipo = Equipo::find($equipoId);
-        
-        // Si el equipo no existe, continuar con el siguiente
-        if (!$equipo) {
-            continue;
+    {
+        foreach ($request->dias as $equipoId => $dias) {
+            $equipo = Equipo::find($equipoId);
+    
+            if (!$equipo) {
+                continue;
+            }
+    
+            // Contar los días seleccionados
+            $diasSeleccionados = collect(['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'])
+                                    ->filter(fn($dia) => isset($dias[$dia]) && $dias[$dia] == 1)
+                                    ->count();
+    
+            // Calcular total de horas encendido (24 horas por día)
+            $horasEncendido = $diasSeleccionados * 24;
+    
+            // Calcular consumo total
+            $consumoTotal = $equipo->consumo_promedio * $diasSeleccionados;
+    
+            // Actualizar el equipo en la base de datos
+            $equipo->update([
+                'lunes' => isset($dias['lunes']),
+                'martes' => isset($dias['martes']),
+                'miercoles' => isset($dias['miercoles']),
+                'jueves' => isset($dias['jueves']),
+                'viernes' => isset($dias['viernes']),
+                'sabado' => isset($dias['sabado']),
+                'dias_utilizados' => $diasSeleccionados,
+                'horas_encendido' => $horasEncendido,  // Nuevo campo
+                'consumo_total' => $consumoTotal,
+            ]);
         }
-
-        // Contar los días seleccionados
-        $diasSeleccionados = collect(['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'])
-                                ->filter(fn($dia) => isset($dias[$dia]) && $dias[$dia] == 1)
-                                ->count();
-
-        // Actualizar los días de la semana y el consumo total
-        $equipo->update([
-            'lunes' => isset($dias['lunes']),
-            'martes' => isset($dias['martes']),
-            'miercoles' => isset($dias['miercoles']),
-            'jueves' => isset($dias['jueves']),
-            'viernes' => isset($dias['viernes']),
-            'sabado' => isset($dias['sabado']),
-            'dias_utilizados' => $diasSeleccionados,
-            'consumo_total' => $equipo->consumo_promedio * $diasSeleccionados,
-        ]);
+    
+        return redirect()->route('equipos.index')->with('success', 'Días y horas actualizados correctamente.');
     }
-
-      return redirect()->route('equipos.index')->with('success', 'Días actualizados correctamente.');
-  }
+    
 
 
          public function store(Request $request)

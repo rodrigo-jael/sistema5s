@@ -29,8 +29,8 @@
                     <div class="container mx-auto p-6">
                         <h2 class="text-xl font-bold mb-4">Nuevo Registro de Consumo de Energía</h2>
                         
-                        <form action="{{ route('equipos.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md">
-                            @csrf
+                        <form action="{{ route('equipos.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                             
                             <div class="mb-4">
                                 <label for="ubicacion" class="block font-medium">Ubicación</label>
@@ -44,9 +44,11 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label for="equipo" class="block font-medium">Equipo</label>
-                                <input type="text" id="equipo" name="equipo" class="w-full border-gray-300 rounded mt-1 uppercase" placeholder="Ingrese el equipo en MAYÚSCULAS" oninput="this.value = this.value.toUpperCase();">
+                                <label for="nombre" class="block font-medium">Equipo</label>
+                                <input type="text" id="nombre" name="nombre" class="w-full border-gray-300 rounded mt-1 uppercase" 
+                                    placeholder="Ingrese el equipo en MAYÚSCULAS" oninput="this.value = this.value.toUpperCase();">
                             </div>
+
                             <div class="mb-4">
                                 <label for="consumo" class="block font-medium">Consumo (kWh)</label>
                                 <input type="number" id="consumo" name="consumo" class="w-full border-gray-300 rounded mt-1" step="0.01">

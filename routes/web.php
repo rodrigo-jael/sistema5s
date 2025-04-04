@@ -94,6 +94,8 @@ Route::middleware('auth')->group(function () {
     //Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
     //Route::get('/evaluaciones/foto/{id}', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
     Route::get('/consumoenergia/nuevo', [ConsumoEnergiaController::class, 'create'])->name('consumoenergia.nuevo');
+    Route::resource('equipos', EquipoController::class);
+
 
 
     

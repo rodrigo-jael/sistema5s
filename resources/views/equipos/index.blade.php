@@ -52,6 +52,8 @@
                                         <th class="border p-2">Sáb</th>
                                         <th class="border p-2">Días Encendidos</th>
                                         <th class="border p-2">Consumo Total</th>
+                                        <th class="border p-2">Horas Encendido</th>
+
                                         <th class="border p-2">Acciones</th>
                                     </tr>
                                 </thead>
@@ -85,6 +87,7 @@
 
                                             <td class="border p-2">{{ $equipo->dias_utilizados }}</td>
                                             <td class="border p-2">{{ $equipo->consumo_total }} kWh</td>
+                                            <td class="border p-2">{{ $equipo->horas_encendido }} hrs</td>
 
                                             <td class="border p-2">
                                                 <a href="" 

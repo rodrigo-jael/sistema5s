@@ -45,7 +45,7 @@
 
         <!-- Imagen al lado derecho -->
         <div class="w-full lg:w-1/3 flex justify-center ">
-            <img src="storage/images/Energia.jpg" alt="Imagen de luz"  
+            <img src="storage/equipos/Energia.jpg" alt="Imagen de luz"  
             class="w-60 lg:w-80 h-auto rounded-lg shadow-md">
         </div>
     </div>
