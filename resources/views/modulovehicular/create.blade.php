@@ -1,5 +1,5 @@
 <x-app-layout>
-<x-slot name="header">
+    <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="bg-white dark:bg-gray-800 leading-tight">Agregar Vehiculo</h2>
             <a href="{{ route('vehicular.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
@@ -9,6 +9,15 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+        
+        {{-- Alerta de éxito --}}
+        @if(session('success'))
+            <div class="mb-6 px-4 py-3 rounded relative bg-green-100 border border-green-400 text-green-700" role="alert">
+                <strong class="font-bold">¡Éxito!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+
         <form action="{{ route('vehiculos.store') }}" method="POST" class="space-y-4">
             @csrf
             <div>
