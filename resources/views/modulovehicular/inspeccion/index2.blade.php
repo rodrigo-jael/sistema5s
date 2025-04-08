@@ -10,47 +10,49 @@
         </div>
     </x-slot>
 
-    <div class="py-6 max-w-5xl mx-auto">
+    <div class="py-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         @if($vehiculo->inspecciones->isEmpty())
             <p class="text-gray-600">Este vehículo no tiene inspecciones registradas.</p>
         @else
-            <table class="w-full table-auto bg-white rounded shadow">
-                <thead class="bg-[#D5AC5B] dark:bg-gray-700">
-                    <tr>
-                        <th class="px-4 py-2 text-white">Fecha</th>
-                        <th class="px-4 py-2 text-white">Kilometraje</th>
-                        <th class="px-4 py-2 text-white">Documentos</th>
-                        <th class="px-4 py-2 text-white">Estado General</th>
-                        <th class="px-4 py-2 text-white">Sede</th>
-                        <th class="px-4 py-2 text-white">Chofer</th>
-                        <th class="px-4 py-2 text-white">Supervisor</th>
-                        <th class="px-4 py-2 text-white">Nivel de Gasolina</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($vehiculo->inspecciones as $inspeccion)
-                        <tr class="border-t">
-                            <td class="px-4 py-2">{{ $inspeccion->fecha }}</td>
-                            <td class="px-4 py-2">{{ $inspeccion->kilometraje }}</td>
-                            <td class="px-4 py-2">
-                                @if($inspeccion->circulacion) Tarjeta de circulación @endif
-                                @if($inspeccion->licencia) Licencia vigente @endif
-                                @if($inspeccion->seguro) Póliza de seguro @endif
-                            </td>
-                            <td class="px-4 py-2">
-                                @if($inspeccion->llantas) Llantas @endif
-                                @if($inspeccion->rines) Rines @endif
-                                @if($inspeccion->cables) Cables dañados @endif
-                                @if($inspeccion->fugas) Fugas visibles @endif
-                            </td>
-                            <td class="px-4 py-2">{{ $inspeccion->sede }}</td>
-                            <td class="px-4 py-2">{{ $inspeccion->chofer }}</td>
-                            <td class="px-4 py-2">{{ $inspeccion->supervisor }}</td>
-                            <td class="px-4 py-2">{{ $inspeccion->nivel_gasolina }}</td>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded shadow text-sm text-left">
+                    <thead class="bg-[#D5AC5B] dark:bg-gray-700 text-white">
+                        <tr>
+                            <th class="px-4 py-2">Fecha</th>
+                            <th class="px-4 py-2">Kilometraje</th>
+                            <th class="px-4 py-2">Documentos</th>
+                            <th class="px-4 py-2">Estado General</th>
+                            <th class="px-4 py-2">Sede</th>
+                            <th class="px-4 py-2">Chofer</th>
+                            <th class="px-4 py-2">Supervisor</th>
+                            <th class="px-4 py-2">Nivel de Gasolina</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($vehiculo->inspecciones as $inspeccion)
+                            <tr class="border-t">
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $inspeccion->fecha }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $inspeccion->kilometraje }}</td>
+                                <td class="px-4 py-2">
+                                    @if($inspeccion->circulacion) <div>Tarjeta de circulación</div> @endif
+                                    @if($inspeccion->licencia) <div>Licencia vigente</div> @endif
+                                    @if($inspeccion->seguro) <div>Póliza de seguro</div> @endif
+                                </td>
+                                <td class="px-4 py-2">
+                                    @if($inspeccion->llantas) <div>Llantas</div> @endif
+                                    @if($inspeccion->rines) <div>Rines</div> @endif
+                                    @if($inspeccion->cables) <div>Cables dañados</div> @endif
+                                    @if($inspeccion->fugas) <div>Fugas visibles</div> @endif
+                                </td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $inspeccion->sede }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $inspeccion->chofer }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $inspeccion->supervisor }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $inspeccion->nivel_gasolina }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
 </x-app-layout>

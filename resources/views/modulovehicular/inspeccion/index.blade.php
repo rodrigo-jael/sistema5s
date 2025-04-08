@@ -34,15 +34,17 @@
                                     <td class="px-4 py-2">{{ $vehiculo->nombre }}</td>
                                     <td class="px-4 py-2">{{ $vehiculo->placa }}</td>
                                     <td class="px-4 py-2">
-                                    <a href="{{ route('inspeccion.create', ['vehiculo_id' => $vehiculo->id]) }}"
-                                          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
-                                          Hacer inspección
-                                    </a>
+                                        <div class="flex space-x-2">
+                                            <a href="{{ route('inspeccion.create', ['vehiculo_id' => $vehiculo->id]) }}"
+                                               class="bg-blue-500 text-white text-sm px-3 py-1.5 rounded hover:bg-blue-600 transition">
+                                               Hacer inspección
+                                            </a>
 
-                                    <a href="{{ route('vehiculo.inspecciones', $vehiculo->id) }}" 
-                                          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-600 transition">
-                                          Ver Inspecciones
-                                    </a>
+                                            <a href="{{ route('vehiculo.inspecciones', $vehiculo->id) }}" 
+                                               class="bg-green-600 text-white text-sm px-3 py-1.5 rounded hover:bg-green-700 transition">
+                                               Ver Inspecciones
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
