@@ -84,14 +84,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/consumoenergia/reportes', [ConsumoEnergiaController::class, 'reportes'])->name('consumoenergia.reportes');
     Route::post('/consumoenergia/{id}/subirRecibo', [ConsumoEnergiaController::class, 'subirRecibo'])->name('consumoenergia.subirRecibo');
     Route::get('/consumoenergia/{id}/descargarRecibo', [ConsumoEnergiaController::class, 'descargarRecibo'])->name('consumoenergia.descargarRecibo');
-    Route::post('/consumoenergia/store', [ConsumoEnergiaController::class, 'store'])->name('consumoenergia.store');
+    Route::post('/consumoenergia', [ConsumoEnergiaController::class, 'store'])->name('consumoenergia.store');
+    Route::delete('/consumoenergia/{id}', [ConsumoEnergiaController::class, 'destroy'])->name('consumoenergia.destroy');
+    Route::put('/consumoenergia/{id}', [ConsumoEnergiaController::class, 'update'])->name('consumoenergia.update');
+
 
   
     Route::resource('equipos', EquipoController::class);
     Route::post('/equipos/updateDias', [EquipoController::class, 'updateDias'])->name('equipos.updateDias');
     Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
     Route::get('/equipos/eliminar/{equipo}', [EquipoController::class, 'eliminar'])->name('equipos.eliminar');
+    Route::post('/equipos/actualizar', [EquipoController::class, 'actualizar'])->name('equipos.actualizar');
+    Route::post('/equipos/update-dia', [EquipoController::class, 'updateDia'])->name('equipos.updateDia');
 
+
+    Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+    
     //Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
     //Route::get('/evaluaciones/foto/{id}', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
     Route::get('/consumoenergia/nuevo', [ConsumoEnergiaController::class, 'create'])->name('consumoenergia.nuevo');

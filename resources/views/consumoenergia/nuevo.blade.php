@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Registro del Equipo</h2>
-            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
-                ←Regresar
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">Registro del Equipo</h2>
+            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
+                ← Regresar
             </a>
         </div>
     </x-slot>
@@ -19,22 +19,20 @@
                         </div>
                     @endif
 
-                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Chequeo</h3>
-                    <div class="flex justify-between mb-4">
-                        
-                    </div>
+                    <h3 class="text-lg font-semibold mb-4 text-[#D5AC5B]">Registro de Chequeo</h3>
 
                     @include('equipos.modal')
 
                     <div class="container mx-auto p-6">
-                        <h2 class="text-xl font-bold mb-4">Nuevo Registro de Consumo de Energía</h2>
+                        <h2 class="text-xl font-bold mb-4 dark:text-white">Nuevo Registro de Consumo de Energía</h2>
                         
                         <form action="{{ route('equipos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                             
                             <div class="mb-4">
-                                <label for="ubicacion" class="block font-medium">Ubicación</label>
-                                <select id="ubicacion" name="ubicacion" class="w-full border-gray-300 rounded mt-1">
+                                <label for="ubicacion" class="block font-medium dark:text-gray-300">Ubicación</label>
+                                <select id="ubicacion" name="ubicacion"
+                                        class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded mt-1">
                                     <option value="">Seleccione una ubicación</option>
                                     <option value="Oficina">OFICINA</option>
                                     <option value="Almacen 1">ALMACEN 1</option>
@@ -43,22 +41,31 @@
                                     <option value="Baño">BAÑO</option>
                                 </select>
                             </div>
+
                             <div class="mb-4">
-                                <label for="nombre" class="block font-medium">Equipo</label>
-                                <input type="text" id="nombre" name="nombre" class="w-full border-gray-300 rounded mt-1 uppercase" 
-                                    placeholder="Ingrese el equipo en MAYÚSCULAS" oninput="this.value = this.value.toUpperCase();">
+                                <label for="nombre" class="block font-medium dark:text-gray-300">Equipo</label>
+                                <input type="text" id="nombre" name="nombre"
+                                       class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded mt-1 uppercase"
+                                       placeholder="Ingrese el equipo en MAYÚSCULAS"
+                                       oninput="this.value = this.value.toUpperCase();">
                             </div>
 
                             <div class="mb-4">
-                                <label for="consumo" class="block font-medium">Consumo (kWh)</label>
-                                <input type="number" id="consumo" name="consumo" class="w-full border-gray-300 rounded mt-1" step="0.01">
+                                <label for="consumo" class="block font-medium dark:text-gray-300">Consumo (kWh)</label>
+                                <input type="number" id="consumo" name="consumo"
+                                       class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded mt-1"
+                                       step="0.01">
                             </div>
-                            
+
                             <div class="mb-4">
-                                <label for="imagen" class="block font-medium">Seleccionar Imagen</label>
-                                <input type="file" id="imagen" name="imagen" class="w-full border-gray-300 rounded mt-1" accept="image/*">
+                                <label for="imagen" class="block font-medium dark:text-gray-300">Seleccionar Imagen</label>
+                                <input type="file" id="imagen" name="imagen"
+                                       class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded mt-1"
+                                       accept="image/*">
                             </div>
-                            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+
+                            <button type="submit"
+                                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
                                 Guardar
                             </button>
                         </form>
@@ -68,6 +75,7 @@
         </div>
     </div>
 
+    <!-- Estilos select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -88,6 +96,17 @@
         .custom-select2-dropdown {
             max-height: 300px;
             overflow-y: auto;
+        }
+
+        /* Soporte dark mode para select2 dropdown */
+        .select2-container--default .select2-results > .select2-results__options {
+            background-color: #1f2937; /* gray-800 */
+            color: #f3f4f6; /* gray-100 */
+        }
+        .select2-container--default .select2-selection--single {
+            background-color: #374151; /* gray-700 */
+            color: #f3f4f6;
+            border-color: #4b5563; /* gray-600 */
         }
     </style>
 </x-app-layout>

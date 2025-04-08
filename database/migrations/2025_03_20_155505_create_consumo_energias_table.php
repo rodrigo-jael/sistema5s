@@ -9,10 +9,10 @@ return new class extends Migration {
     {
         Schema::create('consumo_energia', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('mes');
+           // $table->date('fecha');
+           // $table->string('mes');
             $table->decimal('kwh_consumidos', 8, 2);
-            $table->decimal('kwh_presupuestado', 8, 2);
+            //$table->decimal('kwh_presupuestado', 8, 2);
             $table->timestamps();
         });
     }
