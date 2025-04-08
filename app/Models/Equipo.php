@@ -12,6 +12,6 @@ class Equipo extends Model
     protected $fillable = [
         'nombre', 'imagen', 'ubicacion', 'consumo_promedio',
         'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo',
-        'dias_utilizados', 'consumo_total'
+        'dias_utilizados', 'consumo_total', 'horas_encendido'
     ];
 }
