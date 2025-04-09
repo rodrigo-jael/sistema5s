@@ -15,6 +15,10 @@ use App\Http\Controllers\ConsumoAguaReporteController;
 use App\Http\Controllers\EmployeePhotoController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\InspeccionVehicularController;
+
+use App\Http\Controllers\InspeccionesController;
 
 
 
@@ -111,6 +115,29 @@ Route::middleware('auth')->group(function () {
 
     
 
+
+    Route::post('/employees/photo', [EmployeePhotoController::class, 'store'])->name('employees.photo.store');
+    Route::get('/evaluaciones/foto/{id}', [EvaluationController::class, 'verFoto'])->name('evaluaciones.foto');
+
+
+    //Modulo vehhiculos 
+    Route::get('/vehicular', [VehiculoController::class, 'index'])->name('vehicular.index');
+    Route::get('/vehiculos/create', [VehiculoController::class, 'create'])->name('vehiculos.create');
+    Route::post('/vehiculos', [VehiculoController::class, 'store'])->name('vehiculos.store');
+    Route::get('/inspeccion', [InspeccionVehicularController::class, 'index'])->name('inspeccion.index');
+    Route::post('/inspecciones/store', [InspeccionesController::class, 'store'])->name('inspecciones.store');
+    Route::post('/inspecciones', [InspeccionesController::class, 'store'])->name('inspecciones.store');
+    // Mostrar formulario de edición
+Route::get('/vehiculos/{vehiculo}/edit', [VehiculoController::class, 'edit'])->name('vehiculos.edit');
+
+// Eliminar vehículo
+Route::delete('/vehiculos/{vehiculo}', [VehiculoController::class, 'destroy'])->name('vehiculos.destroy');
+Route::get('/inspeccion/create/{vehiculo_id}', [InspeccionVehicularController::class, 'create'])->name('inspeccion.create');
+Route::post('/inspeccion/store', [InspeccionVehicularController::class, 'store'])->name('inspeccion.store');
+Route::get('/vehiculos/{vehiculo}/inspecciones', [InspeccionVehicularController::class, 'verInspecciones'])->name('vehiculo.inspecciones');
+
+
+    
 
 });
 

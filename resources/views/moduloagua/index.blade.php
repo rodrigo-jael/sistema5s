@@ -6,7 +6,7 @@
     <title>Las 5S - Bienvenida</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white-100 flex flex-col items-center justify-center min-h-screen text-gray-800">
+<body class="bg-white dark:bg-gray-800  flex flex-col items-center justify-center min-h-screen text-gray-800">
     <!-- Contenedor para el encabezado con el logo -->
     <div class="w-full flex justify-between items-center p-4 absolute top-0 left-0 right-0">
         <!-- Logo de la empresa en la parte superior derecha -->
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Contenedor principal con contenido e imagen -->
-    <div class="flex flex-col lg:flex-row items-center justify-between p-8 w-full max-w-6xl bg-white shadow-lg rounded-lg mt-20">
+    <div class="flex flex-col lg:flex-row items-center justify-between p-8 w-full max-w-6xl bg-white dark:bg-gray-800  shadow-lg rounded-lg mt-20">
         
         <!-- Contenido del Módulo Agua -->
         <div class="w-full lg:w-2/3 p-8">

@@ -26,11 +26,9 @@
 
         <!-- Texto -->
         <div class="w-full lg:w-2/3 p-8">
-            <h1 class="text-4xl font-bold mb-8 text-center lg:text-left text-gray-800 dark:text-white">
-                Módulo de Energía
-            </h1>
-            <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
-                Aquí podrás gestionar todo lo relacionado con el consumo de energía dentro del Sistema QMS.
+            <h1 class="text-4xl font-bold text-white-600 mb-8 text-center lg:text-left">Módulo de Energia</h1>
+            <p class="text-gray-600 text-lg mb-6">
+                Aquí podrás gestionar todo lo relacionado con el consumo de energia dentro del Sistema QMS.
             </p>
 
             <!-- Botones -->

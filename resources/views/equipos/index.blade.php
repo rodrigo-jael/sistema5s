@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">Gestión Diaria de Energía</h2>
-            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
-                ← Regresar
-            </a>
-        </div>
+        <h2 class="font-semibold text-xl leading-tight text-center" style="color: #D5AC5B;">
+            {{ __('Gestión Diaria de Equipos') }}
+        </h2>
+        
     </x-slot>
 
     <div class="py-12">
@@ -19,36 +17,27 @@
                         </div>
                     @endif
 
-                    <h3 class="text-lg font-semibold mb-4 text-[#D5AC5B]">Registro</h3>
-
-                    <!-- Menú Desplegable para Filtrar por Ubicación -->
-                    <div class="mb-4 flex justify-between items-center flex-wrap gap-4">
-                        <div class="flex items-center">
-                            <label for="filtroUbicacion" class="mr-2 font-semibold text-lg dark:text-white">Filtrar por Ubicación:</label>
-                            <select id="filtroUbicacion"
-                                    class="border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <option value="todos">Todos</option>
-                                @foreach($equipos->pluck('ubicacion')->unique() as $ubicacion)
-                                    <option value="{{ $ubicacion }}">{{ $ubicacion }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    
-                        <a href="{{ route('consumoenergia.nuevo') }}"
-                            class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300"
-                            style="background-color: #D5AC5B;">
-                            Nuevo
+                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Chequeo</h3>
+                    <div class="flex justify-between mb-4">
+                        <a href="{{ route('luz.index') }}" 
+                           class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300" 
+                           style="background-color: #D5AC5B;">
+                            Regresar
+                        </a>
+                        <a href="#" onclick="openModal()" 
+                              class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
+                               style="background-color: #D5AC5B;">
+                                  Nuevo
                         </a>
                     </div>
-                    
-                    
-                    <form method="POST" action="{{ route('equipos.updateDias') }}">
-                        @csrf
-                        @method('POST')
+                    @include('equipos.modal')
 
-                        <div class="overflow-x-auto">
-                            <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
-                                <thead style="background-color: #D5AC5B;" class="text-black">
+                    <form method="POST" action="{{ route('equipos.updateDias') }}" >
+                        @csrf
+
+                        <div class="overflow-x-auto" >
+                            <table class="w-full border-collapse border border-gray-300" >
+                                <thead style="background-color: #D5AC5B;">
                                     <tr class="text-center">
                                         <th class="border p-2 dark:border-gray-600">Equipo</th>
                                         <th class="border p-2 dark:border-gray-600">Imagen</th>
@@ -65,8 +54,9 @@
                                         <th class="border p-2 dark:border-gray-600">Acciones</th>
                                     </tr>
                                 </thead>
-
-                                <tbody id="tablaEquipos" class="bg-white dark:bg-gray-700">
+                                
+                                
+                                <tbody>
                                     @foreach($equipos as $equipo)
                                         <tr class="text-center fila-equipo border dark:border-gray-600" data-ubicacion="{{ $equipo->ubicacion }}">
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->nombre }}</td>
@@ -77,9 +67,14 @@
                                                     <span class="text-gray-500 dark:text-gray-300">Sin imagen</span>
                                                 @endif
                                             </td>
+                                            
+                                            <td class="border p-2">{{ $equipo->ubicacion }}</td>
+                                        
+                                            <td class="border p-2">{{ $equipo->consumo_promedio }} kWh</td>
 
-                                            <td class="border p-2 dark:border-gray-600">{{ $equipo->ubicacion }}</td>
-                                            <td class="border p-2 dark:border-gray-600">{{ $equipo->consumo_promedio }} kWh</td>
+                                            @php
+                                                $dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+                                            @endphp
 
                                             @foreach($dias as $dia)
                                                 <td class="border p-2 dark:border-gray-600">

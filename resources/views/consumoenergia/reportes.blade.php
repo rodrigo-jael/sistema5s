@@ -5,7 +5,12 @@
                 Historial Bimestral de Consumo y Huella de Carbono
             </h2>
             <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
-                ←Regresar
+                
+    <div class="flex justify-between items-center">
+            <h2 class="bg-white dark:bg-gray-800 leading-tight">Historial de Consumo de Energia</h2>
+            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
+                ← Regresar
+
             </a>
         </div>
     </x-slot>
@@ -90,7 +95,6 @@
                         </form>
                     </div>
                 </div>
-
 
         <!-- Tabla de registros -->
         <table class="w-full bg-white dark:bg-gray-800 shadow-md rounded text-gray-800 dark:text-gray-100">
