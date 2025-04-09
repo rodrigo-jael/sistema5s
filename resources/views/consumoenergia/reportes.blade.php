@@ -144,7 +144,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition">
-                                Eliminar fila
+                                Eliminar Registro
                             </button>
                         </form>
                         

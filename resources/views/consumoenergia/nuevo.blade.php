@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">Registro del Equipo</h2>
-            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
+            <a href="{{ route('equipos.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
                 ← Regresar
             </a>
         </div>

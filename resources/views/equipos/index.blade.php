@@ -22,17 +22,26 @@
                     <h3 class="text-lg font-semibold mb-4 text-[#D5AC5B]">Registro</h3>
 
                     <!-- Menú Desplegable para Filtrar por Ubicación -->
-                    <div class="mb-4 flex items-center">
-                        <label for="filtroUbicacion" class="mr-2 font-semibold text-lg dark:text-white">Filtrar por Ubicación:</label>
-                        <select id="filtroUbicacion"
-                                class="border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            <option value="todos">Todos</option>
-                            @foreach($equipos->pluck('ubicacion')->unique() as $ubicacion)
-                                <option value="{{ $ubicacion }}">{{ $ubicacion }}</option>
-                            @endforeach
-                        </select>
+                    <div class="mb-4 flex justify-between items-center flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <label for="filtroUbicacion" class="mr-2 font-semibold text-lg dark:text-white">Filtrar por Ubicación:</label>
+                            <select id="filtroUbicacion"
+                                    class="border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <option value="todos">Todos</option>
+                                @foreach($equipos->pluck('ubicacion')->unique() as $ubicacion)
+                                    <option value="{{ $ubicacion }}">{{ $ubicacion }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    
+                        <a href="{{ route('consumoenergia.nuevo') }}"
+                            class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300"
+                            style="background-color: #D5AC5B;">
+                            Nuevo
+                        </a>
                     </div>
-
+                    
+                    
                     <form method="POST" action="{{ route('equipos.updateDias') }}">
                         @csrf
                         @method('POST')
@@ -73,13 +82,13 @@
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->consumo_promedio }} kWh</td>
 
                                             @foreach($dias as $dia)
-                                            <td class="border p-2 dark:border-gray-600">
-                                                <input type="checkbox"
-                                                       name="dias[{{ $equipo->id }}][{{ $dia }}]" 
-                                                       value="1"
-                                                       {{ $equipo->$dia ? 'checked' : '' }}>
-                                            </td>
-                                        @endforeach
+                                                <td class="border p-2 dark:border-gray-600">
+                                                    <input type="checkbox"
+                                                        name="dias[{{ $equipo->id }}][{{ $dia }}]" 
+                                                        value="1"
+                                                        {{ $equipo->$dia ? 'checked' : '' }}>
+                                                </td>
+                                           @endforeach
                                         
 
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->dias_utilizados }}</td>
