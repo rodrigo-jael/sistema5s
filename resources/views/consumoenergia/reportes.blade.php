@@ -1,27 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-<<<<<<< HEAD
-    <div class="flex justify-between items-center">
-            <h2 class="bg-white dark:bg-gray-800 leading-tight">Historial de Consumo de Energia</h2>
-            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
-                ← Regresar
-=======
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Historial Bimestral de Consumo y Huella de Carbono
             </h2>
             <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
                 ←Regresar
->>>>>>> origin/dev-mary
             </a>
         </div>
     </x-slot>
 
     <div class="container mx-auto p-6">
 
-<<<<<<< HEAD
-        
-=======
                 @if (session('success'))
                 <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded">
                     {{ session('success') }}
@@ -101,7 +91,6 @@
                     </div>
                 </div>
 
->>>>>>> origin/dev-mary
 
         <!-- Tabla de registros -->
         <table class="w-full bg-white dark:bg-gray-800 shadow-md rounded text-gray-800 dark:text-gray-100">
@@ -155,7 +144,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition">
-                                Eliminar fila
+                                Eliminar Reporte
                             </button>
                         </form>
                         
@@ -163,8 +152,8 @@
                         @foreach ($consumos as $reporte)
                             <!-- Botón de editar por cada reporte -->
                             <div x-data="{ openEdit{{ $reporte->id }}: false }">
-                                <button @click="openEdit{{ $reporte->id }} = true" class="bg-green-600 text-white text-sm px-6 py-1 rounded hover:bg-green-700 transition">
-                                    Editar
+                                <button @click="openEdit{{ $reporte->id }} = true" class="bg-green-600 text-white text-sm px-4 py-1 rounded hover:bg-green-700 transition">
+                                    Editar Reporte
                                 </button>
 
                                 <!-- Modal por cada reporte -->

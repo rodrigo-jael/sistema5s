@@ -1,13 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-<<<<<<< HEAD
-            <h2 class="bg-white dark:bg-gray-800 leading-tight">Gestion Diaria de Equipos</h2>
-            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
-=======
             <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">Gestión Diaria de Energía</h2>
             <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
->>>>>>> origin/dev-mary
                 ← Regresar
             </a>
         </div>
@@ -24,18 +19,6 @@
                         </div>
                     @endif
 
-<<<<<<< HEAD
-                    <h3 class="text-lg font-semibold mb-4" style="color: #D5AC5B">Registro de Chequeo</h3>
-                    <div class="flex justify-between mb-4">
-                        <a href="#" onclick="openModal()" 
-                            class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300" 
-                            style="background-color: #D5AC5B;">
-                            Nuevo
-                        </a>
-                    </div>
-                    @include('equipos.modal')
-
-=======
                     <h3 class="text-lg font-semibold mb-4 text-[#D5AC5B]">Registro</h3>
 
                     <!-- Menú Desplegable para Filtrar por Ubicación -->
@@ -50,18 +33,13 @@
                         </select>
                     </div>
 
->>>>>>> origin/dev-mary
                     <form method="POST" action="{{ route('equipos.updateDias') }}">
                         @csrf
+                        @method('POST')
 
                         <div class="overflow-x-auto">
-<<<<<<< HEAD
-                            <table class="w-full border-collapse border border-gray-300">
-                                <thead style="background-color: #D5AC5B;">
-=======
                             <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
                                 <thead style="background-color: #D5AC5B;" class="text-black">
->>>>>>> origin/dev-mary
                                     <tr class="text-center">
                                         <th class="border p-2 dark:border-gray-600">Equipo</th>
                                         <th class="border p-2 dark:border-gray-600">Imagen</th>
@@ -78,13 +56,8 @@
                                         <th class="border p-2 dark:border-gray-600">Acciones</th>
                                     </tr>
                                 </thead>
-<<<<<<< HEAD
-                                
-                                <tbody>
-=======
 
                                 <tbody id="tablaEquipos" class="bg-white dark:bg-gray-700">
->>>>>>> origin/dev-mary
                                     @foreach($equipos as $equipo)
                                         <tr class="text-center fila-equipo border dark:border-gray-600" data-ubicacion="{{ $equipo->ubicacion }}">
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->nombre }}</td>
@@ -95,23 +68,18 @@
                                                     <span class="text-gray-500 dark:text-gray-300">Sin imagen</span>
                                                 @endif
                                             </td>
-<<<<<<< HEAD
-                                            <td class="border p-2">{{ $equipo->ubicacion }}</td>
-                                            <td class="border p-2">{{ $equipo->consumo_promedio }} kWh</td>
-=======
->>>>>>> origin/dev-mary
 
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->ubicacion }}</td>
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->consumo_promedio }} kWh</td>
 
                                             @foreach($dias as $dia)
-                                            <td class="border p-2 dark:border-gray-600">
-                                                <input type="checkbox"
-                                                       name="dias[{{ $equipo->id }}][{{ $dia }}]" 
-                                                       value="1"
-                                                       {{ $equipo->$dia ? 'checked' : '' }}>
-                                            </td>
-                                        @endforeach
+                                                <td class="border p-2 dark:border-gray-600">
+                                                    <input type="checkbox"
+                                                        name="dias[{{ $equipo->id }}][{{ $dia }}]" 
+                                                        value="1"
+                                                        {{ $equipo->$dia ? 'checked' : '' }}>
+                                                </td>
+                                           @endforeach
                                         
 
                                             <td class="border p-2 dark:border-gray-600">{{ $equipo->dias_utilizados }}</td>

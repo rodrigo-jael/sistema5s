@@ -20,41 +20,8 @@ class EquipoController extends Controller
         return view('equipos.index', compact('equipos', 'dias'));
     }
 
+
     public function updateDias(Request $request)
-<<<<<<< HEAD
-    {
-        foreach ($request->dias as $equipoId => $dias) {
-            // Buscar el equipo, si no existe, ignorar la actualización
-            $equipo = Equipo::find($equipoId);
-            if (!$equipo) {
-                continue;
-            }
-
-            // Contar los días seleccionados
-            $diasSeleccionados = collect(['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'])
-                                    ->filter(fn($dia) => isset($dias[$dia]) && $dias[$dia] == 1)
-                                    ->count();
-
-            // Actualizar los días de la semana y el consumo total
-            $equipo->update([
-                'lunes' => isset($dias['lunes']),
-                'martes' => isset($dias['martes']),
-                'miercoles' => isset($dias['miercoles']),
-                'jueves' => isset($dias['jueves']),
-                'viernes' => isset($dias['viernes']),
-                'sabado' => isset($dias['sabado']),
-                'dias_utilizados' => $diasSeleccionados,
-                'consumo_total' => $equipo->consumo_promedio * $diasSeleccionados,
-            ]);
-        }
-
-        return redirect()->route('equipos.index')->with('success', 'Días de uso actualizados correctamente.');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-=======
 {
     // Recorrer los equipos y sus días
     foreach ($request->dias as $equipoId => $dias) {
@@ -98,50 +65,40 @@ class EquipoController extends Controller
          public function store(Request $request)
         {
             $request->validate([
->>>>>>> origin/dev-mary
             'nombre' => 'required|string|max:255',
             'ubicacion' => 'required|string|max:255',
             'imagen' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
             'consumo' => 'required|numeric',
-        ]);
+            ]);
 
-        // Verificar si la imagen se subió correctamente
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('equipos', 'public');
-            if (!$imagenPath) {
-                return back()->withErrors(['imagen' => 'No se pudo guardar la imagen.']);
-            }
-        } else {
-            $imagenPath = null;
+           // Guardar la imagen si se subió
+           $imagenPath = $request->hasFile('imagen') 
+           ? $request->file('imagen')->store('equipos', 'public') 
+           : null;
+
+          // Crear el equipo en la base de datos
+           Equipo::create([
+          'nombre' => $request->nombre,
+          'ubicacion' => $request->ubicacion,
+          'imagen' => $imagenPath,
+          'consumo_promedio' => $request->consumo,
+           ]);
+
+          return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
         }
 
-        // Crear el equipo en la base de datos
-        Equipo::create([
-            'nombre' => $request->nombre,
-            'ubicacion' => $request->ubicacion,
-            'imagen' => $imagenPath,
-            'consumo_promedio' => $request->consumo,
-        ]);
+        public function eliminar($equipo)
+        {
+            // Encontramos el equipo
+            $equipo = Equipo::findOrFail($equipo);
 
-        return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
-    }
+            // Eliminamos el equipo
+            $equipo->delete();
 
-    public function eliminar($equipo)
-    {
-        $equipo = Equipo::findOrFail($equipo);
-
-        // Borrar la imagen si existe
-        if ($equipo->imagen) {
-            Storage::disk('public')->delete($equipo->imagen);
+            // Redirigimos de vuelta a la lista de equipos con un mensaje de éxito
+            return redirect()->route('equipos.index')->with('success', 'Equipo eliminado correctamente.');
         }
 
-<<<<<<< HEAD
-        // Eliminar el equipo
-        $equipo->delete();
-
-        return redirect()->route('equipos.index')->with('success', 'Equipo eliminado correctamente.');
-    }
-=======
 
         public function actualizar(Request $request)
         {
@@ -178,5 +135,4 @@ class EquipoController extends Controller
         }
 
 
->>>>>>> origin/dev-mary
 }

@@ -36,7 +36,7 @@
 
                             <div class="mb-4">
                                 <label for="litros_consumidos" class="block text-sm font-medium text-gray-700">Litros Consumidos</label>
-                                <input type="number" name="litros_consumidos" id="litros_consumidos" value="{{ old('litros_consumidos') }}" class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" max="450">
+                                <input type="number" name="litros_consumidos" id="litros_consumidos" value="{{ old('litros_consumidos') }}" class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" max="565">
                                 @error('litros_consumidos')
                                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                                 @enderror
