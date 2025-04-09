@@ -36,22 +36,17 @@
 
             <!-- Botones -->
             <div class="mt-6 flex justify-center lg:justify-start gap-4">
-                <a href="{{ route('consumoenergia.nuevo') }}"
-                   class="text-white px-6 py-3 rounded-md shadow-md hover:bg-green-700 transition duration-300"
-                   style="background-color: #D5AC5B;">
-                    Nuevo
-                </a>
-
+                
                 <a href="{{ route('equipos.index') }}"
                    class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300"
                    style="background-color: #D5AC5B;">
-                    Iniciar Registro
+                    Equipo
                 </a>
 
                 <a href="{{ route('consumoenergia.reportes') }}"
                    class="text-white px-6 py-3 rounded-md shadow-md hover:bg-yellow-700 transition duration-300"
                    style="background-color: #D5AC5B;">
-                    Ver Reportes
+                    Reportes
                 </a>
             </div>
         </div>
