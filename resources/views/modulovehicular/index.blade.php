@@ -34,9 +34,7 @@
                 <a href="{{ route('inspeccion.index') }}" class="bg-[#D5AC5B] text-black px-6 py-3 rounded-md shadow-md  duration-300 w-full sm:w-auto text-center">
                      Inspeccion 
                 </a>
-                <a href="" class="bg-[#D5AC5B] text-black  px-6 py-3 rounded-md shadow-md  duration-300 w-full sm:w-auto text-center">
-                     Destinos 
-                 </a>
+               
             </div>
         </div>
         
