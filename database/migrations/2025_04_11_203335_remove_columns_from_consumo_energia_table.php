@@ -6,18 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::table('consumo_energia', function (Blueprint $table) {
-            $table->date('fecha_inicio')->nullable();
-            $table->date('fecha_fin')->nullable();
+            //
         });
     }
-    
-    public function down()
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::table('consumo_energia', function (Blueprint $table) {
-            $table->dropColumn(['fecha_inicio', 'fecha_fin']);
+            //
         });
     }
 };
