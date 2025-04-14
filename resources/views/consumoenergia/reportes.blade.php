@@ -5,12 +5,7 @@
                 Historial Bimestral de Consumo y Huella de Carbono
             </h2>
             <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
-                
-    <div class="flex justify-between items-center">
-            <h2 class="bg-white dark:bg-gray-800 leading-tight">Historial de Consumo de Energia</h2>
-            <a href="{{ route('luz.index') }}" class="bg-[#D5AC5B] text-black font-bold py-2 px-4 rounded">
-                ← Regresar
-
+                ←Regresar
             </a>
         </div>
     </x-slot>
@@ -96,6 +91,7 @@
                     </div>
                 </div>
 
+
         <!-- Tabla de registros -->
         <table class="w-full bg-white dark:bg-gray-800 shadow-md rounded text-gray-800 dark:text-gray-100">
 
@@ -104,13 +100,13 @@
                     <th class="p-2">Periodo Facturado</th>
              
                     <th class="p-2">Consumo (kWh)</th>
-                    <th class="p-2">Huella de Carbono (Kg CO₂)</th>
+                    <th class="p-2">Huella de Carbono (tCO₂)</th>
                     <th class="p-2">PDF</th>
                     <th class="p-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($consumos as $consumo)
+             @foreach ($consumos as $consumo)
                 
                 <tr class="border-b">
                     <td class="p-2">
@@ -142,45 +138,44 @@
                             </form>
                         @endif
                     </td>
-                    <td class="border p-2">
-                        
-                        <form action="{{ route('consumoenergia.destroy', $consumo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta fila?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition">
-                                Eliminar Registro
-                            </button>
-                        </form>
-                        
+                    <!-- DENTRO DEL <td> DE ACCIONES -->
+                        <td class="border p-2">
+                            <!-- Botón para eliminar -->
+                            <form action="{{ route('consumoenergia.destroy', $consumo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta fila?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition">
+                                    Eliminar Reporte
+                                </button>
+                            </form>
 
-                        @foreach ($consumos as $reporte)
-                            <!-- Botón de editar por cada reporte -->
-                            <div x-data="{ openEdit{{ $reporte->id }}: false }">
-                                <button @click="openEdit{{ $reporte->id }} = true" class="bg-green-600 text-white text-sm px-6 py-1 rounded hover:bg-green-700 transition">
-                                    Editar
+                            <!-- Botón y modal para editar (uno por fila) -->
+                            <div x-data="{ openEdit{{ $consumo->id }}: false }" class="mt-2">
+                                <button @click="openEdit{{ $consumo->id }} = true" class="bg-green-600 text-white text-sm px-4 py-1 rounded hover:bg-green-700 transition">
+                                    Editar Reporte
                                 </button>
 
-                                <!-- Modal por cada reporte -->
-                                <div x-show="openEdit{{ $reporte->id }}" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                <!-- Modal único por fila -->
+                                <div x-show="openEdit{{ $consumo->id }}" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                                     <div class="bg-white dark:bg-gray-800 p-6 rounded shadow w-1/2">
                                         <h2 class="text-xl font-bold mb-4 text-blue-600 dark:text-yellow-400">Editar Reporte</h2>
 
-                                        <form action="{{ route('consumoenergia.update', $reporte->id) }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('consumoenergia.update', $consumo->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
 
                                             <div class="grid grid-cols-2 gap-4">
                                                 <div>
                                                     <label class="block text-gray-700 dark:text-gray-200">Fecha inicio:</label>
-                                                    <input type="date" name="fecha_inicio" value="{{ $reporte->fecha_inicio }}" class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" required>
+                                                    <input type="date" name="fecha_inicio" value="{{ $consumo->fecha_inicio }}" class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" required>
                                                 </div>
                                                 <div>
                                                     <label class="block text-gray-700 dark:text-gray-200">Fecha fin:</label>
-                                                    <input type="date" name="fecha_fin" value="{{ $reporte->fecha_fin }}" class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" required>
+                                                    <input type="date" name="fecha_fin" value="{{ $consumo->fecha_fin }}" class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" required>
                                                 </div>
                                                 <div>
                                                     <label class="block text-gray-700 dark:text-gray-200">Consumo (kWh):</label>
-                                                    <input type="number" step="0.01" name="kwh_consumidos" value="{{ $reporte->kwh_consumidos }}" class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" required>
+                                                    <input type="number" step="0.01" name="kwh_consumidos" value="{{ $consumo->kwh_consumidos }}" class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600" required>
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label class="block text-gray-700 dark:text-gray-200">Actualizar PDF (opcional):</label>
@@ -189,7 +184,7 @@
                                             </div>
 
                                             <div class="flex justify-between mt-4">
-                                                <button type="button" @click="openEdit{{ $reporte->id }} = false" class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 transition">
+                                                <button type="button" @click="openEdit{{ $consumo->id }} = false" class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 transition">
                                                     Cancelar
                                                 </button>
                                                 <button type="submit" class="bg-green-600 text-white text-sm px-4 py-2 rounded hover:bg-green-700 transition">
@@ -200,13 +195,10 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        </td>
 
-                        
-                        
-                    </td>
                 </tr>
-                @endforeach
+              @endforeach
 
                 
                 <!-- Fila de Total General -->

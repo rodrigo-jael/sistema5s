@@ -20,78 +20,119 @@ class EquipoController extends Controller
         return view('equipos.index', compact('equipos', 'dias'));
     }
 
+
     public function updateDias(Request $request)
-    {
-        foreach ($request->dias as $equipoId => $dias) {
-            // Buscar el equipo, si no existe, ignorar la actualización
-            $equipo = Equipo::find($equipoId);
-            if (!$equipo) {
-                continue;
-            }
+{
+    // Recorrer los equipos y sus días
+    foreach ($request->dias as $equipoId => $dias) {
+        $equipo = Equipo::find($equipoId);
 
-            // Contar los días seleccionados
-            $diasSeleccionados = collect(['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'])
-                                    ->filter(fn($dia) => isset($dias[$dia]) && $dias[$dia] == 1)
-                                    ->count();
-
-            // Actualizar los días de la semana y el consumo total
-            $equipo->update([
-                'lunes' => isset($dias['lunes']),
-                'martes' => isset($dias['martes']),
-                'miercoles' => isset($dias['miercoles']),
-                'jueves' => isset($dias['jueves']),
-                'viernes' => isset($dias['viernes']),
-                'sabado' => isset($dias['sabado']),
-                'dias_utilizados' => $diasSeleccionados,
-                'consumo_total' => $equipo->consumo_promedio * $diasSeleccionados,
-            ]);
+        if (!$equipo) {
+            continue;
         }
 
-        return redirect()->route('equipos.index')->with('success', 'Días de uso actualizados correctamente.');
+        // Contar los días seleccionados
+        $diasSeleccionados = collect(['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'])
+            ->filter(fn($dia) => isset($dias[$dia]) && $dias[$dia] == 1)
+            ->count();
+
+        // Calcular el total de horas de encendido (24 horas por día)
+        $horasEncendido = $diasSeleccionados * 24;
+
+        // Calcular el consumo total
+        $consumoTotal = $equipo->consumo_promedio * $diasSeleccionados;
+
+        // Actualizar el equipo en la base de datos
+        $equipo->update([
+            'lunes' => isset($dias['lunes']),
+            'martes' => isset($dias['martes']),
+            'miercoles' => isset($dias['miercoles']),
+            'jueves' => isset($dias['jueves']),
+            'viernes' => isset($dias['viernes']),
+            'sabado' => isset($dias['sabado']),
+            'dias_utilizados' => $diasSeleccionados,
+            'horas_encendido' => $horasEncendido,  // Nuevo campo
+            'consumo_total' => $consumoTotal,
+        ]);
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
+    return redirect()->route('equipos.index')->with('success', 'Días y horas actualizados correctamente.');
+}
+
+    
+
+
+         public function store(Request $request)
+        {
+            $request->validate([
             'nombre' => 'required|string|max:255',
             'ubicacion' => 'required|string|max:255',
             'imagen' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
             'consumo' => 'required|numeric',
-        ]);
+            ]);
 
-        // Verificar si la imagen se subió correctamente
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('equipos', 'public');
-            if (!$imagenPath) {
-                return back()->withErrors(['imagen' => 'No se pudo guardar la imagen.']);
+           // Guardar la imagen si se subió
+           $imagenPath = $request->hasFile('imagen') 
+           ? $request->file('imagen')->store('equipos', 'public') 
+           : null;
+
+          // Crear el equipo en la base de datos
+           Equipo::create([
+          'nombre' => $request->nombre,
+          'ubicacion' => $request->ubicacion,
+          'imagen' => $imagenPath,
+          'consumo_promedio' => $request->consumo,
+           ]);
+
+          return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
+        }
+
+        public function eliminar($equipo)
+        {
+            // Encontramos el equipo
+            $equipo = Equipo::findOrFail($equipo);
+
+            // Eliminamos el equipo
+            $equipo->delete();
+
+            // Redirigimos de vuelta a la lista de equipos con un mensaje de éxito
+            return redirect()->route('equipos.index')->with('success', 'Equipo eliminado correctamente.');
+        }
+
+
+        public function actualizar(Request $request)
+        {
+            $equipo = Equipo::findOrFail($request->id);
+            $equipo->ubicacion = $request->ubicacion;
+            $equipo->nombre = strtoupper($request->nombre);
+            $equipo->consumo_promedio = $request->consumo;
+
+            if ($request->hasFile('imagen')) {
+                $imagenPath = $request->file('imagen')->store('equipos', 'public');
+                $equipo->imagen = $imagenPath;
             }
-        } else {
-            $imagenPath = null;
+
+            $equipo->save();
+
+            return redirect()->back()->with('success', 'Equipo actualizado correctamente.');
         }
 
-        // Crear el equipo en la base de datos
-        Equipo::create([
-            'nombre' => $request->nombre,
-            'ubicacion' => $request->ubicacion,
-            'imagen' => $imagenPath,
-            'consumo_promedio' => $request->consumo,
-        ]);
+        public function updateDia(Request $request)
+        {
+            $equipo = Equipo::findOrFail($request->equipo_id);
+            $dia = $request->dia;
 
-        return redirect()->route('equipos.index')->with('success', 'Equipo registrado correctamente.');
-    }
+            // Aseguramos que el nombre del día sea válido
+            if (!in_array($dia, ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'])) {
+                return back()->with('error', 'Día inválido');
+            }
 
-    public function eliminar($equipo)
-    {
-        $equipo = Equipo::findOrFail($equipo);
+            // Guardamos el valor (1 si está marcado, 0 si no)
+            $equipo->$dia = $request->has('activo');
+            $equipo->save();
 
-        // Borrar la imagen si existe
-        if ($equipo->imagen) {
-            Storage::disk('public')->delete($equipo->imagen);
+            return back()->with('success', 'Día actualizado');
         }
 
-        // Eliminar el equipo
-        $equipo->delete();
 
-        return redirect()->route('equipos.index')->with('success', 'Equipo eliminado correctamente.');
-    }
 }
