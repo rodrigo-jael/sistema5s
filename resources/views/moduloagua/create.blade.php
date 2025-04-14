@@ -13,7 +13,7 @@
 
         <div class="mb-4">
             <label class="block text-gray-700">Litros Consumidos:</label>
-            <input type="number" name="litros_consumidos" class="border rounded w-full p-2" min="0" max="450" required>
+            <input type="number" name="litros_consumidos" class="border rounded w-full p-2" min="0" max="565" required>
         </div>
 
         <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Guardar</button>
