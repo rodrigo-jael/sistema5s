@@ -132,7 +132,7 @@ Route::get('/vehiculos/{vehiculo}/edit', [VehiculoController::class, 'edit'])->n
 Route::delete('/vehiculos/{vehiculo}', [VehiculoController::class, 'destroy'])->name('vehiculos.destroy');
 Route::get('/inspeccion/create/{vehiculo_id}', [InspeccionVehicularController::class, 'create'])->name('inspeccion.create');
 Route::post('/inspeccion/store', [InspeccionVehicularController::class, 'store'])->name('inspeccion.store');
-Route::get('/vehiculos/{vehiculo}/inspecciones', [InspeccionVehicularController::class, 'verInspecciones'])->name('vehiculo.inspecciones');
+Route::get('/vehiculos/{vehiculo}/inspecciones', [InspeccionVehicularController::class, 'verinspecciones'])->name('vehiculo.inspecciones');
 
 
     
